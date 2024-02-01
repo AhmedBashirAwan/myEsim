@@ -70,12 +70,7 @@ class LocalSimsState extends State<LocalSims>
             }
             PlanTypesResponse planTypesResponse = snapshot.data!;
             List<PlanType> planTypes = planTypesResponse.planTypes;
-            List<PlanType> countryPlan = [];
-            for (var element in planTypes) {
-              if (element.countriesEnabled.contains('PAK')) {
-                countryPlan.add(element);
-              }
-            }
+
             return Column(
               children: [
                 Container(
@@ -240,7 +235,7 @@ class LocalSimsState extends State<LocalSims>
                               return ListView.builder(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 20),
-                                itemCount: countryPlan.length,
+                                itemCount: countryPlanning.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     height: 70,
@@ -266,10 +261,13 @@ class LocalSimsState extends State<LocalSims>
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
-                                          child: Image.network(
+                                          child: SvgPicture.asset(
                                             countryPlanning[index].flag,
-                                            fit: BoxFit.cover,
                                           ),
+                                          // child: Image.network(
+                                          //   countryPlanning[index].flag,
+                                          //   fit: BoxFit.cover,
+                                          // ),
                                         ),
                                         const SizedBox(width: 10),
                                         SizedBox(
@@ -280,12 +278,12 @@ class LocalSimsState extends State<LocalSims>
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Text(countryPlan[index]
+                                              Text(countryPlanning[index]
                                                   .name
                                                   .toString()),
                                               Text(
-                                                countryPlan[index]
-                                                    .policyName
+                                                countryPlanning[index]
+                                                    .iso3
                                                     .toString(),
                                                 style: const TextStyle(
                                                   color: Colors.grey,
