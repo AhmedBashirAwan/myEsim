@@ -1,5 +1,7 @@
 import 'dart:io';
+
 import 'package:esim/apiservices/api_services.dart';
+import 'package:esim/components/MarqueeWidget.dart';
 import 'package:esim/components/drawer.dart';
 import 'package:esim/components/global_panel.dart';
 import 'package:esim/models/countries_model.dart';
@@ -163,51 +165,42 @@ class LocalSimsState extends State<LocalSims>
                         ),
                         controller: _tabController,
                         tabs: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: Tab(
-                                  child: SizedBox(
-                                    width: getWidth(context) * 0.23,
-                                    child: const Text(
-                                      'Local ESIMs',
-                                    ),
+                          Center(
+                            child: Tab(
+                              child: SizedBox(
+                                width: getWidth(context) * 0.23,
+                                child: TextMarqueeWidget(
+                                  child: const Text(
+                                    'Local ESIMs',
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: Tab(
-                                  // text: "Regional ESIMs",
-                                  child: SizedBox(
-                                    width: getWidth(context) * 0.23,
-                                    child: const Text(
-                                      'Regional ESIMs',
-                                    ),
+                          Center(
+                            child: Tab(
+                              // text: "Regional ESIMs",
+                              child: SizedBox(
+                                width: getWidth(context) * 0.23,
+                                child: TextMarqueeWidget(
+                                  child: const Text(
+                                    'Regional ESIMs',
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: Tab(
-                                  child: SizedBox(
-                                    width: getWidth(context) * 0.23,
-                                    child: const Text(
-                                      'Global ESIMs',
-                                    ),
+                          Center(
+                            child: Tab(
+                              child: SizedBox(
+                                width: getWidth(context) * 0.23,
+                                child: TextMarqueeWidget(
+                                  child: const Text(
+                                    'Global ESIMs',
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
