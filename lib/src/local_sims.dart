@@ -261,7 +261,7 @@ class LocalSimsState extends State<LocalSims>
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
-                                          child: SvgPicture.asset(
+                                          child: SvgPicture.network(
                                             countryPlanning[index].flag,
                                           ),
                                           // child: Image.network(
@@ -271,7 +271,7 @@ class LocalSimsState extends State<LocalSims>
                                         ),
                                         const SizedBox(width: 10),
                                         SizedBox(
-                                          width: 100,
+                                          width: 150,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
