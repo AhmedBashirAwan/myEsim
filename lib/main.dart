@@ -1,5 +1,4 @@
 import 'package:esim/dashboard.dart';
-import 'package:esim/src/landing.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,6 +18,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Landing());
+        home: Dashboard());
   }
 }

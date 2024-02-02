@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:esim/models/countries_model.dart';
-import 'package:esim/models/plans_model.dart';
-import 'package:esim/models/pricingmodel.dart';
+import 'package:esim/src/mainpage/models/countries_model.dart';
+import 'package:esim/src/mainpage/models/plans_model.dart';
+import 'package:esim/src/mainpage/models/pricingmodel.dart';
 import 'package:http/http.dart' as http;
 
-class ApiServices {
+class MainController {
   Future<PricingResponse> fetchingPricing() async {
     final url =
         Uri.parse('https://api.maya.net/connectivity/v1/account/pricing');
@@ -62,7 +62,7 @@ class ApiServices {
 
       final response = await http.get(url, headers: headers);
 
-      print('Response: ${response.statusCode} - ${response.body}');
+      // print('Response: ${response.statusCode} - ${response.body}');
       if (response.statusCode == 200) {
         // Check if response data is not null before parsing
 
@@ -70,7 +70,7 @@ class ApiServices {
             PlanTypesResponse.fromJson(json.decode(response.body));
         return planTypesResponse;
       } else {
-        print('Unexpected status code: ${response.statusCode}');
+        // print('Unexpected status code: ${response.statusCode}');
         throw Exception(
             'Failed to fetch plan types data. Status code: ${response.statusCode}');
       }
@@ -88,7 +88,8 @@ class ApiServices {
   }
 
   Future<List<Country>> fetchingAllFlags() async {
-    final response = await http.get(Uri.parse('https://countriesnow.space/api/v0.1/countries/flag/images'));
+    final response = await http.get(
+        Uri.parse('https://countriesnow.space/api/v0.1/countries/flag/images'));
 
     if (response.statusCode == 200) {
       // If server returns an OK response, parse the JSON
