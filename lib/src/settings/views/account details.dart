@@ -1,5 +1,5 @@
-import 'package:esim/src/helpers.dart';
-import 'package:esim/src/sign_in.dart';
+import 'package:esim/helpers.dart';
+import 'package:esim/src/auth/views/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class AccountDetails extends StatefulWidget {

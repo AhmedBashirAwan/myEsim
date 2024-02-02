@@ -1,7 +1,8 @@
-import 'package:esim/src/account%20details.dart';
-import 'package:esim/src/qr_screen.dart';
+
+import 'package:esim/src/qrscreens/views/qr_screen.dart';
+import 'package:esim/src/settings/views/account%20details.dart';
 import 'package:flutter/material.dart';
-import 'src/mainpage/views/local_sims.dart';
+import '../src/mainpage/views/local_sims.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

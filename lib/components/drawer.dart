@@ -1,6 +1,7 @@
-import 'package:esim/src/account%20details.dart';
-import 'package:esim/src/landing.dart';
-import 'package:esim/src/settings.dart';
+
+import 'package:esim/src/auth/views/landing.dart';
+import 'package:esim/src/settings/views/account%20details.dart';
+import 'package:esim/src/settings/views/settings.dart';
 import 'package:flutter/material.dart';
 
 class Drrawer extends StatefulWidget {

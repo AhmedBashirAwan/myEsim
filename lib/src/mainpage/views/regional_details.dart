@@ -1,4 +1,4 @@
-import 'package:esim/src/helpers.dart';
+import 'package:esim/helpers.dart';
 import 'package:flutter/material.dart';
 
 class RegionalDetails extends StatelessWidget {

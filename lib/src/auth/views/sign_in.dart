@@ -1,5 +1,5 @@
-import 'package:esim/dashboard.dart';
-import 'package:esim/src/resetpassword.dart';
+import 'package:esim/components/dashboard.dart';
+import 'package:esim/src/auth/views/resetpassword.dart';
 import 'package:flutter/material.dart';
 
 import 'sign_up.dart';

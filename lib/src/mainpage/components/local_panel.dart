@@ -1,10 +1,10 @@
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/components/MarqueeWidget.dart';
 import 'package:esim/src/mainpage/models/countries_model.dart';
+import 'package:esim/src/mainpage/views/local_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../local_details.dart';
 
 class LocalPanel extends StatefulWidget {
   const LocalPanel({super.key});

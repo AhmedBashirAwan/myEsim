@@ -1,4 +1,4 @@
-import 'package:esim/dashboard.dart';
+import 'package:esim/components/dashboard.dart';
 import 'package:flutter/material.dart';
 
 void main() {

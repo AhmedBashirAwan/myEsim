@@ -1,4 +1,4 @@
-import 'package:esim/src/landing.dart';
+import 'package:esim/src/auth/views/landing.dart';
 import 'package:flutter/material.dart';
 
 class Ttitle extends StatelessWidget {

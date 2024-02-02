@@ -1,13 +1,9 @@
 import 'package:esim/src/mainpage/components/regional_panel.dart';
-import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/components/MarqueeWidget.dart';
 import 'package:esim/components/drawer.dart';
 import 'package:esim/src/mainpage/components/global_panel.dart';
-import 'package:esim/src/mainpage/models/countries_model.dart';
-import 'package:esim/src/helpers.dart';
-import 'package:esim/src/local_details.dart';
+import 'package:esim/helpers.dart';
 import 'package:esim/src/mainpage/components/local_panel.dart';
-import 'package:esim/src/regional_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

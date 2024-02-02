@@ -1,4 +1,4 @@
-import 'package:esim/src/sign_in.dart';
+import 'package:esim/src/auth/views/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatelessWidget {

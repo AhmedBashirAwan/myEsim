@@ -1,4 +1,5 @@
-import 'package:esim/src/regional_details.dart';
+
+import 'package:esim/src/mainpage/views/regional_details.dart';
 import 'package:flutter/material.dart';
 
 class RegionalPanel extends StatefulWidget {
