@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LocalSims extends StatefulWidget {
+  const LocalSims({super.key});
   @override
   LocalSimsState createState() => LocalSimsState();
 }
