@@ -5,7 +5,6 @@ import 'package:esim/src/mainpage/views/local_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-
 class LocalPanel extends StatefulWidget {
   const LocalPanel({super.key});
 
@@ -24,7 +23,12 @@ class _LocalPanelState extends State<LocalPanel> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          List<Country> countryPlanning = snapshot.data ?? [];
+          List<Country> countryPlanning = [];
+          snapshot.data!.forEach((element) {
+            if (countryPlanning.contains(element) == false) {
+              countryPlanning.add(element);
+            }
+          });
           return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             itemCount: countryPlanning.length,

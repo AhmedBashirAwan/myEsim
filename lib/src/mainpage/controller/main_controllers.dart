@@ -86,7 +86,7 @@ class MainController {
       }
     }
   }
-
+ 
   Future<List<Country>> fetchingAllFlags() async {
     final response = await http.get(
         Uri.parse('https://countriesnow.space/api/v0.1/countries/flag/images'));
@@ -105,3 +105,40 @@ class MainController {
     }
   }
 }
+
+List<Map<String, dynamic>> regions = [
+  {
+    'name': 'Asia',
+    'imageUrl':
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1LQPmhjirqant2jtNclW0l33_7-rdbUI05g&usqp=CAU'
+  },
+  {
+    'name': 'Europe',
+    'imageUrl':
+        'https://e7.pngegg.com/pngimages/432/676/png-clipart-europe-map-map-black-white-computer-wallpaper.png'
+  },
+  {
+    'name': 'Africa',
+    'imageUrl': 'https://c8.alamy.com/comp/GKPJ01/map-of-africa-GKPJ01.jpg'
+  },
+  {
+    'name': 'South America',
+    'imageUrl':
+        'https://as2.ftcdn.net/v2/jpg/03/12/53/21/1000_F_312532189_mmh8rkLcanEyC6NpC0GmZzShbl9fp5uS.jpg'
+  },
+  {
+    'name': 'North America',
+    'imageUrl':
+        'https://cdn5.vectorstock.com/i/1000x1000/19/84/black-north-america-map-vector-1601984.jpg'
+  },
+  {
+    'name': 'Oceania',
+    'imageUrl':
+        'https://img.freepik.com/premium-vector/australia-oceania-map-monochrome-australia-icon-vector_189959-318.jpg'
+  },
+  {
+    'name': 'Antarctica',
+    'imageUrl':
+        'https://www.shutterstock.com/image-vector/map-antarctic-silhouette-260nw-577881580.jpg'
+  },
+];

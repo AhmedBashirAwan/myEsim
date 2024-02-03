@@ -1,6 +1,7 @@
-
+import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/views/regional_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class RegionalPanel extends StatefulWidget {
   const RegionalPanel({super.key});
@@ -14,7 +15,7 @@ class _RegionalPanelState extends State<RegionalPanel> {
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      itemCount: 10,
+      itemCount: regions.length,
       itemBuilder: (context, index) {
         return Container(
           height: 70,
@@ -30,11 +31,15 @@ class _RegionalPanelState extends State<RegionalPanel> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                width: 80,
                 height: 50,
+                width: 100,
                 decoration: BoxDecoration(
-                  color: Colors.green.shade300,
-                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Image.network(
+                  regions[index]['imageUrl'],
+                  fit: BoxFit.fill,
                 ),
               ),
               const SizedBox(width: 10),
@@ -44,11 +49,7 @@ class _RegionalPanelState extends State<RegionalPanel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Region"
-                        // planTypes[index]
-                        //   .name
-                        //   .toString()
-                        ), // Adjust the region name based on the index
+                    Text(regions[index]['name']),
                   ],
                 ),
               ),

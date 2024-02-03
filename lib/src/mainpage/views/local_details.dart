@@ -35,7 +35,8 @@ class _LocalDetailsState extends State<LocalDetails> {
           List<PlanType> allPlans = (snapshot.data as dynamic).planTypes;
           List countryPlan = [];
           for (var element in allPlans) {
-            if (element.countriesEnabled.contains(widget.countryCode)) {
+            if (element.countriesEnabled.contains(widget.countryCode) &&
+                countryPlan.contains(element) == false) {
               countryPlan.add(element);
             }
           }
@@ -50,7 +51,6 @@ class _LocalDetailsState extends State<LocalDetails> {
                 child: Stack(
                   children: [
                     Container(
-                      height: getHeight(context) * 0.58,
                       width: getWidth(context),
                       margin: const EdgeInsets.only(top: 10),
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
@@ -137,7 +137,7 @@ class _LocalDetailsState extends State<LocalDetails> {
                                         ],
                                       ),
                                       Text(
-                                        '${plan.dataQuotaMb/1000.toInt()} GBs',
+                                        '${plan.dataQuotaMb / 1000.toInt()} GBs',
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w800),
@@ -212,27 +212,20 @@ class _LocalDetailsState extends State<LocalDetails> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      height: getHeight(context) * 0.05,
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.white),
-                                          borderRadius:
-                                              BorderRadius.circular(16)),
-                                      child: const Center(
-                                        child: Text(
-                                          'Buy Now',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
+                              padding: const EdgeInsets.all(8),
+                              child: Expanded(
+                                child: Container(
+                                  height: getHeight(context) * 0.07,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(16)),
+                                  child: const Center(
+                                    child: Text(
+                                      'Buy Now',
+                                      style: TextStyle(color: Colors.white),
                                     ),
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
                             )
                           ],
