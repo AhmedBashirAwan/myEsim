@@ -1,4 +1,5 @@
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
+import 'package:esim/src/mainpage/views/region_countries.dart';
 import 'package:esim/src/mainpage/views/regional_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -64,7 +65,9 @@ class _RegionalPanelState extends State<RegionalPanel> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => RegionalDetails(),
+                      builder: (context) => RegionsCountries(
+                        region: regions[index]['name'],
+                      ),
                     ),
                   );
                 },

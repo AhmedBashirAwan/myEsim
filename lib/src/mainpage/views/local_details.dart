@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 class LocalDetails extends StatefulWidget {
   final String? countryCode;
-  const LocalDetails({super.key, required this.countryCode});
+  final String? countryName;
+  const LocalDetails(
+      {super.key, required this.countryCode, required this.countryName});
 
   @override
   State<LocalDetails> createState() => _LocalDetailsState();
@@ -19,7 +21,7 @@ class _LocalDetailsState extends State<LocalDetails> {
       appBar: AppBar(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
-        title: const Text('Country Name'),
+        title: Text(widget.countryName.toString()),
       ),
       body: FutureBuilder(
         future: MainController().fetchingAllPlans(),
@@ -213,17 +215,15 @@ class _LocalDetailsState extends State<LocalDetails> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8),
-                              child: Expanded(
-                                child: Container(
-                                  height: getHeight(context) * 0.07,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child: const Center(
-                                    child: Text(
-                                      'Buy Now',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                              child: Container(
+                                height: getHeight(context) * 0.07,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white),
+                                    borderRadius: BorderRadius.circular(16)),
+                                child: const Center(
+                                  child: Text(
+                                    'Buy Now',
+                                    style: TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ),

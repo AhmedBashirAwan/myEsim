@@ -49,6 +49,7 @@ class LocalSimsState extends State<LocalSims>
                 ),
                 child: Column(children: [
                   Container(
+                    
                     decoration: BoxDecoration(
                       color: const Color.fromRGBO(24, 91, 255, 1),
                       borderRadius: BorderRadius.circular(20),

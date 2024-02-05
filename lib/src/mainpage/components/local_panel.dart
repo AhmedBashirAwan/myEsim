@@ -90,6 +90,8 @@ class _LocalPanelState extends State<LocalPanel> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => LocalDetails(
+                              countryName:
+                                  countryPlanning[index].name.toString(),
                               countryCode:
                                   countryPlanning[index].iso3.toString(),
                             ),
