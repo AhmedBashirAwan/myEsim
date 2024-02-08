@@ -1,4 +1,4 @@
-import 'package:esim/helpers.dart';
+import 'package:esim/globals.dart';
 import 'package:flutter/material.dart';
 
 class QrScreen extends StatefulWidget {
@@ -61,9 +61,9 @@ class _QrScreenState extends State<QrScreen>
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Row(
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
                     children: [
                       Text(
                         'My eSIMs',

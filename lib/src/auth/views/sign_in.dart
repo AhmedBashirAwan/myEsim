@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'sign_up.dart';
 
 class SignIn extends StatelessWidget {
+  const SignIn({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,12 +133,12 @@ class SignIn extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignUp()),
+                        MaterialPageRoute(builder: (context) => const SignUp()),
                       );
                     },
                     child: const Text('Sign Up',
                         style: TextStyle(
-                          color: const Color.fromRGBO(24, 91, 255, 1),
+                          color:  Color.fromRGBO(24, 91, 255, 1),
                         )),
                   )
                 ],

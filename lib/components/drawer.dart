@@ -1,6 +1,6 @@
 
 import 'package:esim/src/auth/views/landing.dart';
-import 'package:esim/src/settings/views/account%20details.dart';
+import 'package:esim/src/settings/views/account_details.dart';
 import 'package:esim/src/settings/views/settings.dart';
 import 'package:flutter/material.dart';
 
@@ -71,22 +71,7 @@ class _DrrawerState extends State<Drrawer> {
             child: Text("Main Menu",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           ),
-          ListTile(
-            title: const Row(
-              children: [
-                Icon(Icons.cached_rounded),
-                SizedBox(
-                  width: 10,
-                ),
-                Text('Esim',
-                    style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-              ],
-            ),
-            onTap: () {
-              // Handle item tap
-            },
-          ),
+          
           ListTile(
             title: const Row(
               children: [
@@ -156,7 +141,7 @@ class _DrrawerState extends State<Drrawer> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Landing()),
+                MaterialPageRoute(builder: (context) => const Landing()),
               );
             },
           ),

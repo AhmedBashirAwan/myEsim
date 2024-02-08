@@ -2,24 +2,27 @@ import 'package:esim/src/mainpage/components/regional_panel.dart';
 import 'package:esim/components/MarqueeWidget.dart';
 import 'package:esim/components/drawer.dart';
 import 'package:esim/src/mainpage/components/global_panel.dart';
-import 'package:esim/helpers.dart';
+import 'package:esim/globals.dart';
 import 'package:esim/src/mainpage/components/local_panel.dart';
+import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class LocalSims extends StatefulWidget {
-  const LocalSims({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
   @override
-  LocalSimsState createState() => LocalSimsState();
+  MainScreenState createState() => MainScreenState();
 }
 
-class LocalSimsState extends State<LocalSims>
+class MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
+  final TextEditingController _searchingController = TextEditingController();
   late TabController _tabController;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   bool global = false;
   @override
   void initState() {
+    MainController().fetchingAllFlags();
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
   }
@@ -31,8 +34,7 @@ class LocalSimsState extends State<LocalSims>
       drawer: const Drrawer(),
       key: scaffoldKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor:
-          const Color.fromRGBO(240, 245, 245, 1), //Color('#f5f5f5'),
+      backgroundColor: const Color.fromRGBO(240, 245, 245, 1),
       body: Column(
         children: [
           Container(
@@ -49,7 +51,6 @@ class LocalSimsState extends State<LocalSims>
                 ),
                 child: Column(children: [
                   Container(
-                    
                     decoration: BoxDecoration(
                       color: const Color.fromRGBO(24, 91, 255, 1),
                       borderRadius: BorderRadius.circular(20),
@@ -95,6 +96,13 @@ class LocalSimsState extends State<LocalSims>
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                     child: TextField(
+                      controller: _searchingController,
+                      onChanged: (value) {
+                        setState(() {});
+                      },
+                      onSubmitted: (value) {
+                        setState(() {});
+                      },
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
@@ -165,7 +173,13 @@ class LocalSimsState extends State<LocalSims>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const [LocalPanel(), RegionalPanel(), GlobalPanel()],
+              children: [
+                LocalPanel(
+                  searchQuery: _searchingController.text,
+                ),
+                const RegionalPanel(),
+                const GlobalPanel()
+              ],
             ),
           ),
         ],

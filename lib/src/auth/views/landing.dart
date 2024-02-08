@@ -3,6 +3,8 @@ import 'package:esim/src/auth/views/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class Landing extends StatelessWidget {
+  const Landing({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +64,7 @@ class Landing extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUp()),
+                      MaterialPageRoute(builder: (context) => const SignUp()),
                     );
                   },
                   style: const ButtonStyle(),
@@ -83,7 +85,7 @@ class Landing extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignIn()),
+                      MaterialPageRoute(builder: (context) => const SignIn()),
                     );
                   },
                   style: const ButtonStyle(),

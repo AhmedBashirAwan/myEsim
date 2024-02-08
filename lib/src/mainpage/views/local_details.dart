@@ -1,11 +1,11 @@
-import 'package:esim/helpers.dart';
+import 'package:esim/globals.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
 import 'package:flutter/material.dart';
 
 class LocalDetails extends StatefulWidget {
   final String? countryCode;
-  final String? countryName;
+  final String countryName;
   const LocalDetails(
       {super.key, required this.countryCode, required this.countryName});
 
@@ -33,20 +33,24 @@ class _LocalDetailsState extends State<LocalDetails> {
           } else if (snapshot.data == null) {
             return const Center(child: Text('No data available'));
           }
-
           List<PlanType> allPlans = (snapshot.data as dynamic).planTypes;
           List countryPlan = [];
           for (var element in allPlans) {
-            if (element.countriesEnabled.contains(widget.countryCode) &&
-                countryPlan.contains(element) == false) {
-              countryPlan.add(element);
+            if (element.countriesEnabled.contains(widget.countryCode)) {
+              if (!countryPlan.contains(element)) {
+                if (element.name
+                    .toLowerCase()
+                    .contains(widget.countryName.toLowerCase())) {
+                  countryPlan.add(element);
+                }
+              }
             }
           }
+          countryPlan;
           return ListView.builder(
             itemCount: countryPlan.length,
             itemBuilder: (context, index) {
               PlanType plan = countryPlan[index];
-
               return Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

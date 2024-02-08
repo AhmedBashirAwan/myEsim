@@ -1,4 +1,4 @@
-import 'package:esim/helpers.dart';
+import 'package:esim/globals.dart';
 import 'package:flutter/material.dart';
 
 class GlobalDetails extends StatefulWidget {

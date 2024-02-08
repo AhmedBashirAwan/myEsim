@@ -1,4 +1,4 @@
-import 'package:esim/helpers.dart';
+import 'package:esim/globals.dart';
 import 'package:flutter/material.dart';
 
 class GlobalPanel extends StatefulWidget {
@@ -88,7 +88,7 @@ class _GlobalPanelState extends State<GlobalPanel> {
                             margin: const EdgeInsets.only(top: 10),
                             padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                             decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: const Color(0xFFF9911E),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Container(
@@ -284,7 +284,7 @@ class _GlobalPanelState extends State<GlobalPanel> {
                               height: getHeight(context) * 0.1,
                               width: getWidth(context) * 0.34,
                               decoration: BoxDecoration(
-                                  color: Colors.amber,
+                                  color: Colors.green,
                                   borderRadius: BorderRadius.circular(16)),
                             ),
                           )

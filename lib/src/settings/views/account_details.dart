@@ -1,4 +1,4 @@
-import 'package:esim/helpers.dart';
+import 'package:esim/globals.dart';
 import 'package:esim/src/auth/views/sign_in.dart';
 import 'package:flutter/material.dart';
 
@@ -389,7 +389,8 @@ class _AccountDetailsState extends State<AccountDetails> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SignIn()),
+                            MaterialPageRoute(
+                                builder: (context) => const SignIn()),
                           );
                         },
                         child: Padding(

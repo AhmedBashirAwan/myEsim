@@ -2,6 +2,8 @@ import 'package:esim/src/auth/views/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatelessWidget {
+  const SignUp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +97,7 @@ class SignUp extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignIn()),
+                      MaterialPageRoute(builder: (context) => const SignIn()),
                     );
                   },
                   style: const ButtonStyle(),
@@ -116,13 +118,13 @@ class SignUp extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignIn()),
+                        MaterialPageRoute(builder: (context) => const SignIn()),
                       );
                     },
                     child: const Text('Sign In',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          color:  Color.fromRGBO(24, 91, 255, 1),
+                          color: Color.fromRGBO(24, 91, 255, 1),
                         )),
                   )
                 ],
@@ -132,6 +134,5 @@ class SignUp extends StatelessWidget {
         ),
       ),
     );
-    
   }
 }
