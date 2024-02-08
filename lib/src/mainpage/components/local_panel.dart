@@ -1,4 +1,4 @@
-
+import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/models/countries_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,6 +16,12 @@ class LocalPanel extends StatefulWidget {
 }
 
 class _LocalPanelState extends State<LocalPanel> {
+  @override
+  void initState() {
+    // MainController().fetchingAllFlags();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Country?> searchedCountries = [];

@@ -1,7 +1,9 @@
-
+import 'package:esim/globals.dart';
+import 'package:esim/src/auth/authcontroller/authcontroller.dart';
 import 'package:esim/src/auth/views/landing.dart';
 import 'package:esim/src/settings/views/account_details.dart';
 import 'package:esim/src/settings/views/settings.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Drrawer extends StatefulWidget {
@@ -47,17 +49,28 @@ class _DrrawerState extends State<Drrawer> {
                       const SizedBox(
                         width: 20,
                       ),
-                      const Column(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            "Username",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          SizedBox(
+                            width: getWidth(context) * 0.3,
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              FirebaseAuth.instance.currentUser != null
+                                  ? FirebaseAuth.instance.currentUser!.email ??
+                                      'Username'
+                                  : 'Username',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
                           ),
-                          Text(
-                            "Disconnected",
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
+                          // const Text(
+                          //   "Disconnected",
+                          //   style: TextStyle(color: Colors.white, fontSize: 14),
+                          // ),
                         ],
                       )
                     ],
@@ -71,7 +84,6 @@ class _DrrawerState extends State<Drrawer> {
             child: Text("Main Menu",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           ),
-          
           ListTile(
             title: const Row(
               children: [
@@ -139,10 +151,7 @@ class _DrrawerState extends State<Drrawer> {
               ],
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Landing()),
-              );
+              AuthController().logout();
             },
           ),
         ],

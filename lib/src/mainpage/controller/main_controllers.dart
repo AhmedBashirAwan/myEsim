@@ -28,7 +28,6 @@ class MainController {
       final response = await http.get(url, headers: headers);
 
       if (response.statusCode == 200) {
-
         PricingResponse pricingResponse =
             PricingResponse.fromJson(json.decode(response.body));
         return pricingResponse;

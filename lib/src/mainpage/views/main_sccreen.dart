@@ -22,7 +22,7 @@ class MainScreenState extends State<MainScreen>
   bool global = false;
   @override
   void initState() {
-    MainController().fetchingAllFlags();
+    // MainController().fetchingAllFlags();
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
   }

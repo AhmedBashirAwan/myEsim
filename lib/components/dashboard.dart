@@ -1,5 +1,7 @@
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
+import 'package:esim/src/settings/views/account_details.dart';
 import 'package:esim/src/settings/views/profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../src/mainpage/views/main_sccreen.dart';
 
@@ -16,7 +18,9 @@ class _DashboardState extends State<Dashboard> {
   final List _pages = [
     const MainScreen(),
     const QrScreen(),
-    const ProfileView()
+    FirebaseAuth.instance.currentUser!.uid.isEmpty
+        ? const ProfileView()
+        : const AccountDetails()
   ];
   _changeTab(int index) {
     setState(() {

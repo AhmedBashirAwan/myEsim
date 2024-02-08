@@ -1,4 +1,3 @@
-
 import 'package:esim/components/dashboard.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +13,15 @@ class _TtitleState extends State<Ttitle> {
   @override
   void initState() {
     super.initState();
-    _populateCountriesAndNavigate();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _populateCountriesAndNavigate();
+    });
   }
 
   void _populateCountriesAndNavigate() {
     try {
       MainController().fetchingAllFlags();
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Dashboard()),
       );

@@ -1,0 +1,68 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class AuthController {
+  Future<void> loginInTheFirebase(
+    String email,
+    String pass,
+  ) async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: pass);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> creatingUser(
+      {required String email,
+      required String pass,
+      required String name}) async {
+    try {
+      UserCredential credentials = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: pass);
+      if (credentials.user!.uid.isNotEmpty) {
+        Map<String, dynamic> payload = {
+          "email": email,
+          "name": name,
+          "user_ID": credentials.user!.uid
+        };
+        await FirebaseFirestore.instance
+            .collection('User_Credentials')
+            .add(payload);
+      } else {
+        print('Kindly fill all of the fields');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<Map<String, dynamic>?> getCurrentUser() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> userSnapshot = await FirebaseFirestore
+          .instance
+          .collection('User_Credentials')
+          .where("user_ID", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .get();
+
+      if (userSnapshot.docs.isNotEmpty) {
+        Map<String, dynamic> userData = userSnapshot.docs.first.data();
+        return userData;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error getting current user: $e');
+      return null;
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+}
