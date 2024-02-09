@@ -3,7 +3,7 @@ import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:flutter/material.dart';
 
 class Ttitle extends StatefulWidget {
-  const Ttitle({super.key});
+  const Ttitle({Key? key}) : super(key: key);
 
   @override
   State<Ttitle> createState() => _TtitleState();
@@ -13,15 +13,13 @@ class _TtitleState extends State<Ttitle> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _populateCountriesAndNavigate();
-    });
+    _populateCountriesAndNavigate();
   }
 
-  void _populateCountriesAndNavigate() {
+  void _populateCountriesAndNavigate() async {
     try {
-      MainController().fetchingAllFlags();
-      Navigator.push(
+      await MainController().fetchingAllFlags();
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Dashboard()),
       );

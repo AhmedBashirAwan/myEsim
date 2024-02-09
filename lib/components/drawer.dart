@@ -1,5 +1,5 @@
 import 'package:esim/globals.dart';
-import 'package:esim/src/auth/authcontroller/authcontroller.dart';
+import 'package:esim/src/auth/controller/authcontroller.dart';
 import 'package:esim/src/auth/views/landing.dart';
 import 'package:esim/src/settings/views/account_details.dart';
 import 'package:esim/src/settings/views/settings.dart';

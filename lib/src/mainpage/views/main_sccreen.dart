@@ -1,3 +1,4 @@
+import 'package:esim/src/auth/controller/authcontroller.dart';
 import 'package:esim/src/mainpage/components/regional_panel.dart';
 import 'package:esim/components/MarqueeWidget.dart';
 import 'package:esim/components/drawer.dart';
@@ -74,9 +75,17 @@ class MainScreenState extends State<MainScreen>
                                       semanticsLabel: 'Acme Logo'),
                                 )),
                           ),
-                          const Text('Hello, User',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white)),
+                          FutureBuilder(
+                            future: AuthController().getCurrentUser(),
+                            builder: (context, snapshot) {
+                              final userName = snapshot.data?['name'] ?? "User";
+                              return Text(
+                                'Hello, ${userName}',
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              );
+                            },
+                          ),
                           InkWell(
                             onTap: () {},
                             child: Container(

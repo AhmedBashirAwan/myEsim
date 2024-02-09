@@ -18,9 +18,9 @@ class _DashboardState extends State<Dashboard> {
   final List _pages = [
     const MainScreen(),
     const QrScreen(),
-    FirebaseAuth.instance.currentUser!.uid.isEmpty
-        ? const ProfileView()
-        : const AccountDetails()
+    // FirebaseAuth.instance.currentUser!.uid.isEmpty?
+    const ProfileView()
+    // : const AccountDetails()
   ];
   _changeTab(int index) {
     setState(() {
