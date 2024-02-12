@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esim/src/mainpage/models/countries_model.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
 import 'package:esim/src/mainpage/models/pricingmodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../globals.dart';
@@ -105,13 +106,41 @@ class MainController {
   }
 
   Future<List<Map<String, dynamic>>> fetchingPrices() async {
-  QuerySnapshot<Map<String, dynamic>> prices = await FirebaseFirestore.instance.collection('offers_pricings').get();
-  List<Map<String, dynamic>> offers = [];
-  for (QueryDocumentSnapshot<Map<String, dynamic>> doc in prices.docs) {
-    offers.add(doc.data());
+    QuerySnapshot<Map<String, dynamic>> prices =
+        await FirebaseFirestore.instance.collection('offers_pricings').get();
+    List<Map<String, dynamic>> offers = [];
+    for (QueryDocumentSnapshot<Map<String, dynamic>> doc in prices.docs) {
+      offers.add(doc.data());
+    }
+    return offers;
   }
-  return offers;
-}
+
+  Future<void> updatingPrice(
+      String data, String validation_days, String price) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> doc = await FirebaseFirestore.instance
+          .collection('offers_pricings')
+          .where('data', isEqualTo: data)
+          .where('validation_dates', isEqualTo: validation_days)
+          .get();
+
+      if (doc.docs.isNotEmpty) {
+        DocumentSnapshot<Map<String, dynamic>> firstDoc = doc.docs.first;
+        await firstDoc.reference.update({'price': price});
+        print('Price updated successfully');
+      } else {
+        // If no documents found, add a new one
+        await FirebaseFirestore.instance.collection('offers_pricings').add({
+          'data': data,
+          'validation_dates': validation_days,
+          'price': price,
+        });
+        print('New document added successfully');
+      }
+    } catch (e) {
+      print('Error updating price: $e');
+    }
+  }
 }
 
 List<Map<String, dynamic>> regions = [

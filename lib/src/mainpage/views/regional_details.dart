@@ -2,7 +2,6 @@ import 'package:esim/globals.dart';
 import 'package:esim/src/auth/views/registeration.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
-import 'package:esim/src/settings/views/account_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +15,29 @@ class RegionalDetails extends StatefulWidget {
 }
 
 class _RegionalDetailsState extends State<RegionalDetails> {
+  bool adminUser = false;
+
+  Future<void> checkingForAdmin() async {
+    if (FirebaseAuth.instance.currentUser != null &&
+        FirebaseAuth.instance.currentUser!.email ==
+            'ahmedbashirawan@gmail.com') {
+      setState(() {
+        adminUser = true;
+        print('Admin access given');
+      });
+    } else {
+      setState(() {
+        adminUser = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    checkingForAdmin();
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

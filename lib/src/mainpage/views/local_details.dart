@@ -19,6 +19,31 @@ class LocalDetails extends StatefulWidget {
 }
 
 class _LocalDetailsState extends State<LocalDetails> {
+  bool adminUser = false;
+
+  TextEditingController rate = TextEditingController();
+
+  Future<void> checkingForAdmin() async {
+    if (FirebaseAuth.instance.currentUser != null &&
+        FirebaseAuth.instance.currentUser!.email ==
+            'ahmedbashirawan@gmail.com') {
+      setState(() {
+        adminUser = true;
+        print('Admin access given');
+      });
+    } else {
+      setState(() {
+        adminUser = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    checkingForAdmin();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +64,7 @@ class _LocalDetailsState extends State<LocalDetails> {
             return const Center(child: Text('No data available'));
           }
           List<PlanType> allPlans = (snapshot.data as dynamic).planTypes;
+          allPlans;
           List<PlanType> countryPlan = [];
           for (var element in allPlans) {
             if (element.countriesEnabled.contains(widget.countryCode)) {
@@ -215,12 +241,12 @@ class _LocalDetailsState extends State<LocalDetails> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                // mainAxisAlignment:
+                                //     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Row(
                                     children: [
-                                      Icon(Icons.price_check,
+                                      Icon(Icons.date_range,
                                           color: Colors.white),
                                       SizedBox(width: 40),
                                       Text(
@@ -228,6 +254,53 @@ class _LocalDetailsState extends State<LocalDetails> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ],
+                                  ),
+                                  const Spacer(),
+                                  Visibility(
+                                      visible: adminUser,
+                                      child: InkWell(
+                                          onTap: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      'Enter new rates'),
+                                                  content: TextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    controller: rate,
+                                                  ),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        MainController()
+                                                            .updatingPrice(
+                                                                plan.dataQuotaMb
+                                                                    .toString(),
+                                                                plan.validityDays
+                                                                    .toString(),
+                                                                rate.text
+                                                                    .trim());
+                                                        setState(() {});
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child:
+                                                          const Text('Update'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: const Icon(
+                                            Icons.edit,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ))),
+                                  const SizedBox(
+                                    width: 20,
                                   ),
                                   FutureBuilder(
                                     future: MainController().fetchingPrices(),
@@ -284,8 +357,7 @@ class _LocalDetailsState extends State<LocalDetails> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            const QrScreen(),
+                                        builder: (context) => const QrScreen(),
                                       ),
                                     );
                                   } else {

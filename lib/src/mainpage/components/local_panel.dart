@@ -111,6 +111,7 @@ class _LocalPanelState extends State<LocalPanel> {
                       ),
                     ),
                   );
+                  print(searchedCountries[index]!.iso3.toString());
                 },
                 child: Icon(
                   Icons.chevron_right,
