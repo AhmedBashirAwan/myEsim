@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esim/src/mainpage/models/countries_model.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
 import 'package:esim/src/mainpage/models/pricingmodel.dart';
@@ -102,6 +103,15 @@ class MainController {
       throw Exception('Failed to fetch flags data. Error: $error');
     }
   }
+
+  Future<List<Map<String, dynamic>>> fetchingPrices() async {
+  QuerySnapshot<Map<String, dynamic>> prices = await FirebaseFirestore.instance.collection('offers_pricings').get();
+  List<Map<String, dynamic>> offers = [];
+  for (QueryDocumentSnapshot<Map<String, dynamic>> doc in prices.docs) {
+    offers.add(doc.data());
+  }
+  return offers;
+}
 }
 
 List<Map<String, dynamic>> regions = [

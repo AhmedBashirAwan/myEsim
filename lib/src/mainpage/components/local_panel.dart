@@ -33,6 +33,14 @@ class _LocalPanelState extends State<LocalPanel> {
           searchedCountries.add(element);
         }
       }
+      Map<String, dynamic> clientCountry = {
+        'name': 'Kosovo',
+        'flag': 'https://www.svgrepo.com/show/405524/flag-for-flag-kosovo.svg',
+        'iso2': 'XK',
+        'iso3': 'XXK',
+      };
+      Country country = Country.fromJson(clientCountry);
+      searchedCountries.add(country);
     } else {
       for (var element in allCountries) {
         searchedCountries.add(element);

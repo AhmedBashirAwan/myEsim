@@ -1,13 +1,18 @@
-import 'package:esim/globals.dart';
+import 'package:esim/src/auth/views/registeration.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
+import 'package:esim/src/qrscreens/views/qr_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LocalDetails extends StatefulWidget {
   final String? countryCode;
   final String countryName;
-  const LocalDetails(
-      {super.key, required this.countryCode, required this.countryName});
+  const LocalDetails({
+    Key? key,
+    required this.countryCode,
+    required this.countryName,
+  }) : super(key: key);
 
   @override
   State<LocalDetails> createState() => _LocalDetailsState();
@@ -21,7 +26,7 @@ class _LocalDetailsState extends State<LocalDetails> {
       appBar: AppBar(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
-        title: Text(widget.countryName.toString()),
+        title: Text(widget.countryName),
       ),
       body: FutureBuilder(
         future: MainController().fetchingAllPlans(),
@@ -34,7 +39,7 @@ class _LocalDetailsState extends State<LocalDetails> {
             return const Center(child: Text('No data available'));
           }
           List<PlanType> allPlans = (snapshot.data as dynamic).planTypes;
-          List countryPlan = [];
+          List<PlanType> countryPlan = [];
           for (var element in allPlans) {
             if (element.countriesEnabled.contains(widget.countryCode)) {
               if (!countryPlan.contains(element)) {
@@ -46,7 +51,6 @@ class _LocalDetailsState extends State<LocalDetails> {
               }
             }
           }
-          countryPlan;
           return ListView.builder(
             itemCount: countryPlan.length,
             itemBuilder: (context, index) {
@@ -57,7 +61,7 @@ class _LocalDetailsState extends State<LocalDetails> {
                 child: Stack(
                   children: [
                     Container(
-                      width: getWidth(context),
+                      width: MediaQuery.of(context).size.width,
                       margin: const EdgeInsets.only(top: 10),
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                       decoration: BoxDecoration(
@@ -78,7 +82,9 @@ class _LocalDetailsState extends State<LocalDetails> {
                                   Text(
                                     plan.name.toString(),
                                     style: const TextStyle(
-                                        color: Colors.white, fontSize: 16),
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -90,9 +96,12 @@ class _LocalDetailsState extends State<LocalDetails> {
                                   padding:
                                       const EdgeInsets.fromLTRB(20, 10, 20, 10),
                                   decoration: const BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.lightGreen))),
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Colors.lightGreen,
+                                      ),
+                                    ),
+                                  ),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -112,8 +121,9 @@ class _LocalDetailsState extends State<LocalDetails> {
                                       Text(
                                         plan.countriesEnabled.length.toString(),
                                         style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w800),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w800,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -123,9 +133,12 @@ class _LocalDetailsState extends State<LocalDetails> {
                                   padding:
                                       const EdgeInsets.fromLTRB(20, 10, 20, 20),
                                   decoration: const BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.lightGreen))),
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Colors.lightGreen,
+                                      ),
+                                    ),
+                                  ),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -143,14 +156,15 @@ class _LocalDetailsState extends State<LocalDetails> {
                                         ],
                                       ),
                                       Text(
-                                        '${plan.dataQuotaMb / 1000.toInt()} GBs',
+                                        '${plan.dataQuotaMb / 1000} GBs',
                                         style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w800),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w800,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
                             Container(
@@ -158,9 +172,12 @@ class _LocalDetailsState extends State<LocalDetails> {
                               padding:
                                   const EdgeInsets.fromLTRB(20, 10, 20, 20),
                               decoration: const BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: Colors.lightGreen))),
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.lightGreen,
+                                  ),
+                                ),
+                              ),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -179,8 +196,9 @@ class _LocalDetailsState extends State<LocalDetails> {
                                   Text(
                                     '${plan.validityDays} Days',
                                     style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w800),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w800,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -190,14 +208,17 @@ class _LocalDetailsState extends State<LocalDetails> {
                               padding:
                                   const EdgeInsets.fromLTRB(20, 10, 20, 20),
                               decoration: const BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: Colors.lightGreen))),
-                              child: const Row(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.lightGreen,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
+                                  const Row(
                                     children: [
                                       Icon(Icons.price_check,
                                           color: Colors.white),
@@ -208,26 +229,87 @@ class _LocalDetailsState extends State<LocalDetails> {
                                       ),
                                     ],
                                   ),
-                                  Text(
-                                    '100',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w800),
+                                  FutureBuilder(
+                                    future: MainController().fetchingPrices(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return const Text(
+                                          'Loading...',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return Text(
+                                          'Error: ${snapshot.error}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        );
+                                      } else {
+                                        var prices = snapshot.data
+                                            as List<Map<String, dynamic>>;
+                                        var price = prices.firstWhere(
+                                          (element) =>
+                                              int.parse(element['data']) ==
+                                              plan.dataQuotaMb,
+                                          orElse: () => plan.dataQuotaMb == 1024
+                                              ? {'price': '5'}
+                                              : {'price': 'N/A'},
+                                        )['price'];
+                                        return Text(
+                                          '\$${price.toString()}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        );
+                                      }
+                                    },
                                   ),
                                 ],
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8),
-                              child: Container(
-                                height: getHeight(context) * 0.07,
-                                decoration: BoxDecoration(
+                              child: InkWell(
+                                onTap: () {
+                                  if (FirebaseAuth.instance.currentUser !=
+                                          null &&
+                                      FirebaseAuth.instance.currentUser!.uid
+                                          .isNotEmpty) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const QrScreen(),
+                                      ),
+                                    );
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Registeration(),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  decoration: BoxDecoration(
                                     border: Border.all(color: Colors.white),
-                                    borderRadius: BorderRadius.circular(16)),
-                                child: const Center(
-                                  child: Text(
-                                    'Buy Now',
-                                    style: TextStyle(color: Colors.white),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Buy Now',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -239,11 +321,12 @@ class _LocalDetailsState extends State<LocalDetails> {
                     Positioned(
                       right: 20,
                       child: Container(
-                        height: getHeight(context) * 0.1,
-                        width: getWidth(context) * 0.34,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        width: MediaQuery.of(context).size.width * 0.34,
                         decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(16)),
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                       ),
                     )
                   ],

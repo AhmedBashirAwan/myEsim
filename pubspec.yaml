@@ -41,6 +41,10 @@ dependencies:
   google_sign_in: ^6.2.1
   firebase_auth: ^4.17.4
   cloud_firestore: ^4.15.4
+  pretty_qr_code: ^3.2.1
+  flutter_stripe: ^10.0.0
+  flutter_dotenv: ^5.1.0
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
