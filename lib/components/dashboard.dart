@@ -1,12 +1,10 @@
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
-import 'package:esim/src/settings/views/account_details.dart';
 import 'package:esim/src/settings/views/profile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../src/mainpage/views/main_sccreen.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -15,14 +13,22 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int _selectedTab = 0;
 
-  final List _pages = [
-    const MainScreen(),
-    const QrScreen(),
-    // FirebaseAuth.instance.currentUser!.uid.isEmpty?
-    const ProfileView()
-    // : const AccountDetails()
-  ];
-  _changeTab(int index) {
+  late final List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      const MainScreen(),
+      const QrScreen(),
+      // FirebaseAuth.instance.currentUs/urrentUser!.uid.isNotEmpty
+      // ?
+      const ProfileView()
+      // : const AccountDetails()
+    ];
+  }
+
+  void _changeTab(int index) {
     setState(() {
       _selectedTab = index;
     });
@@ -32,22 +38,28 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedTab],
-      // body: Container(),
       bottomNavigationBar: Theme(
         data: ThemeData(canvasColor: Colors.white),
         child: BottomNavigationBar(
-            currentIndex: _selectedTab,
-            onTap: (index) => _changeTab(index),
-            selectedItemColor: Colors.blue.shade800,
-            unselectedItemColor: Colors.black,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_bag_outlined), label: "Store"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.sim_card_outlined), label: "ESIMs"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person_3_outlined), label: "Profile"),
-            ]),
+          currentIndex: _selectedTab,
+          onTap: _changeTab,
+          selectedItemColor: Colors.blue.shade800,
+          unselectedItemColor: Colors.black,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag_outlined),
+              label: "Store",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.sim_card_outlined),
+              label: "ESIMs",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_3_outlined),
+              label: "Profile",
+            ),
+          ],
+        ),
       ),
     );
   }

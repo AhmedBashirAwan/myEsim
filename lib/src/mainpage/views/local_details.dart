@@ -1,5 +1,6 @@
 import 'package:esim/src/auth/views/registeration.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
+import 'package:esim/src/mainpage/models/esim_model.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,10 +9,12 @@ import 'package:flutter/material.dart';
 class LocalDetails extends StatefulWidget {
   final String? countryCode;
   final String countryName;
+  final String iso2;
   const LocalDetails({
     Key? key,
     required this.countryCode,
     required this.countryName,
+    required this.iso2,
   }) : super(key: key);
 
   @override
@@ -26,7 +29,7 @@ class _LocalDetailsState extends State<LocalDetails> {
   Future<void> checkingForAdmin() async {
     if (FirebaseAuth.instance.currentUser != null &&
         FirebaseAuth.instance.currentUser!.email ==
-            'ahmedbashirawan@gmail.com') {
+            'artan.blakqori@gmail.com') {
       setState(() {
         adminUser = true;
         print('Admin access given');
@@ -354,10 +357,14 @@ class _LocalDetailsState extends State<LocalDetails> {
                                           null &&
                                       FirebaseAuth.instance.currentUser!.uid
                                           .isNotEmpty) {
+                                    Future<EsimResponse> esimResponse =
+                                        MainController()
+                                            .creatingEsim(widget.iso2);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const QrScreen(),
+                                        builder: (context) =>
+                                            QrScreen(esim: esimResponse),
                                       ),
                                     );
                                   } else {

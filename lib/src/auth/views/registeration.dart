@@ -120,8 +120,8 @@ class _RegisterationState extends State<Registeration>
                                     }
                                   });
                                 },
-                                child: const Icon(
-                                    Icons.remove_red_eye_outlined)),
+                                child:
+                                    const Icon(Icons.remove_red_eye_outlined)),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide:
@@ -159,16 +159,27 @@ class _RegisterationState extends State<Registeration>
                             height: getHeight(context) * 0.06,
                             width: getWidth(context) * 0.5,
                             child: ElevatedButton(
-                                onPressed: () {
-                                  AuthController().loginInTheFirebase(
-                                      _loginEmail.text.trim(),
-                                      _loginPass.text.trim());
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Dashboard()),
-                                  );
+                                onPressed: () async {
+                                  try {
+                                    await AuthController().loginInTheFirebase(
+                                        _loginEmail.text.trim(),
+                                        _loginPass.text.trim());
+                                    setState(() {});
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const Dashboard(),
+                                      ),
+                                    );
+                                  } catch (e) {
+                                    // Show a Snackbar if login fails
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            'Login failed. Please check your credentials.'),
+                                      ),
+                                    );
+                                  }
                                 },
                                 child: const Text(
                                   'LOGIN',
@@ -261,8 +272,8 @@ class _RegisterationState extends State<Registeration>
                                     }
                                   });
                                 },
-                                child: const Icon(
-                                    Icons.remove_red_eye_outlined)),
+                                child:
+                                    const Icon(Icons.remove_red_eye_outlined)),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide:
@@ -293,8 +304,8 @@ class _RegisterationState extends State<Registeration>
                                     }
                                   });
                                 },
-                                child: const Icon(
-                                    Icons.remove_red_eye_outlined)),
+                                child:
+                                    const Icon(Icons.remove_red_eye_outlined)),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide:

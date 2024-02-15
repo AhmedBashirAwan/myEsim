@@ -1,4 +1,3 @@
-import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/models/countries_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -37,7 +36,7 @@ class _LocalPanelState extends State<LocalPanel> {
         'name': 'Kosovo',
         'flag': 'https://www.svgrepo.com/show/405524/flag-for-flag-kosovo.svg',
         'iso2': 'XK',
-        'iso3': 'XXK',
+        'iso3': 'KSV',
       };
       Country country = Country.fromJson(clientCountry);
       searchedCountries.add(country);
@@ -106,12 +105,12 @@ class _LocalPanelState extends State<LocalPanel> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => LocalDetails(
+                        iso2: searchedCountries[index]!.iso2.toString(),
                         countryName: searchedCountries[index]!.name.toString(),
                         countryCode: searchedCountries[index]!.iso3.toString(),
                       ),
                     ),
                   );
-                  print(searchedCountries[index]!.iso3.toString());
                 },
                 child: Icon(
                   Icons.chevron_right,

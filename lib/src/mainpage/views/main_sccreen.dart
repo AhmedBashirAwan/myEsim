@@ -5,7 +5,6 @@ import 'package:esim/components/drawer.dart';
 import 'package:esim/src/mainpage/components/global_panel.dart';
 import 'package:esim/globals.dart';
 import 'package:esim/src/mainpage/components/local_panel.dart';
-import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

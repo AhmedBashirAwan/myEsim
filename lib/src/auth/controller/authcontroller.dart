@@ -1,17 +1,16 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthController {
-  Future<void> loginInTheFirebase(
+  Future<UserCredential> loginInTheFirebase(
     String email,
     String pass,
   ) async {
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: pass);
-    } catch (e) {
-      print(e);
-    }
+    UserCredential credential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: pass);
+    return credential;
   }
 
   Future<void> creatingUser(
@@ -53,7 +52,6 @@ class AuthController {
         return null;
       }
     } catch (e) {
-      print('Error getting current user: $e');
       return null;
     }
   }

@@ -1,6 +1,7 @@
 import 'package:esim/globals.dart';
 import 'package:esim/src/auth/views/registeration.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
+import 'package:esim/src/mainpage/models/esim_model.dart';
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +17,14 @@ class RegionalDetails extends StatefulWidget {
 
 class _RegionalDetailsState extends State<RegionalDetails> {
   bool adminUser = false;
+  TextEditingController rate = TextEditingController();
 
   Future<void> checkingForAdmin() async {
     if (FirebaseAuth.instance.currentUser != null &&
         FirebaseAuth.instance.currentUser!.email ==
-            'ahmedbashirawan@gmail.com') {
+            'artan.blakqori@gmail.com') {
       setState(() {
         adminUser = true;
-        print('Admin access given');
       });
     } else {
       setState(() {
@@ -37,7 +38,7 @@ class _RegionalDetailsState extends State<RegionalDetails> {
     checkingForAdmin();
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -227,8 +228,8 @@ class _RegionalDetailsState extends State<RegionalDetails> {
                                             bottom: BorderSide(
                                                 color: Colors.lightGreen))),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceBetween,
                                       children: [
                                         const Row(
                                           children: [
@@ -241,6 +242,57 @@ class _RegionalDetailsState extends State<RegionalDetails> {
                                                   color: Colors.white),
                                             ),
                                           ],
+                                        ),
+                                        const Spacer(),
+                                        Visibility(
+                                            visible: adminUser,
+                                            child: InkWell(
+                                                onTap: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            'Enter new rates'),
+                                                        content: TextField(
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          controller: rate,
+                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              MainController().updatingPrice(
+                                                                  plans
+                                                                      .dataQuotaMb
+                                                                      .toString(),
+                                                                  plans
+                                                                      .validityDays
+                                                                      .toString(),
+                                                                  rate.text
+                                                                      .trim());
+                                                              setState(() {});
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: const Text(
+                                                                'Update'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                child: const Icon(
+                                                  Icons.edit,
+                                                  color: Colors.white,
+                                                  size: 20,
+                                                ))),
+                                        const SizedBox(
+                                          width: 20,
                                         ),
                                         Text(
                                           '\$$price',
@@ -268,11 +320,17 @@ class _RegionalDetailsState extends State<RegionalDetails> {
                                                       .currentUser!
                                                       .uid
                                                       .isNotEmpty) {
+                                                Future<EsimResponse>
+                                                    esimResponse =
+                                                    MainController()
+                                                        .creatingEsim(
+                                                            widget.regionName);
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const QrScreen(),
+                                                        QrScreen(
+                                                            esim: esimResponse),
                                                   ),
                                                 );
                                               } else {

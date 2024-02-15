@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esim/src/mainpage/models/countries_model.dart';
+import 'package:esim/src/mainpage/models/esim_model.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
 import 'package:esim/src/mainpage/models/pricingmodel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../globals.dart';
@@ -127,18 +127,42 @@ class MainController {
       if (doc.docs.isNotEmpty) {
         DocumentSnapshot<Map<String, dynamic>> firstDoc = doc.docs.first;
         await firstDoc.reference.update({'price': price});
-        print('Price updated successfully');
       } else {
-        // If no documents found, add a new one
         await FirebaseFirestore.instance.collection('offers_pricings').add({
           'data': data,
           'validation_dates': validation_days,
           'price': price,
         });
-        print('New document added successfully');
       }
     } catch (e) {
       print('Error updating price: $e');
+    }
+  }
+
+  Future<EsimResponse> creatingEsim(String region) async {
+ 
+    String data =
+        '{ "tag": "", "region": "$region" }'; // Convert data to string
+
+    var headers = {
+      // 'Content-Type': 'text/plain', // Change content type to text/plain
+      'Authorization':
+          'Basic ZGNHTzZJdVFUbnRoOnRrdmtaaGR1ZzNyamhXQWU4bFRJU1RQV1phSlYyYTZ6THhqaWlWWGxiMXkzVXg2QnVKdExZWVVNdnBxMEhucVI=',
+      'Cookie': 'maya=cca9db59f3f4a2f3d7f9f7b2c074d49f'
+    };
+
+    var url = 'https://api.maya.net/connectivity/v1/esim';
+
+    try {
+      var response =
+          await http.post(Uri.parse(url), headers: headers, body: data);
+      if (response.statusCode == 201) {
+        return EsimResponse.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('Request failed with status: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('Error: $error');
     }
   }
 }
@@ -346,66 +370,6 @@ List<Map<String, dynamic>> regions = [
       'Vatican City'
     ]
   },
-  // {
-  //   'name': 'Africa',
-  //   'imageUrl': 'https://c8.alamy.com/comp/GKPJ01/map-of-africa-GKPJ01.jpg',
-  //   'countries': [
-  //     'Algeria',
-  //     'Angola',
-  //     'Benin',
-  //     'Botswana',
-  //     'Burkina Faso',
-  //     'Burundi',
-  //     'Cabo Verde',
-  //     'Cameroon',
-  //     'Central African Republic',
-  //     'Chad',
-  //     'Comoros',
-  //     'Democratic Republic of the Congo',
-  //     'Djibouti',
-  //     'Egypt',
-  //     'Equatorial Guinea',
-  //     'Eritrea',
-  //     'Eswatini',
-  //     'Ethiopia',
-  //     'Gabon',
-  //     'Gambia',
-  //     'Ghana',
-  //     'Guinea',
-  //     'Guinea-Bissau',
-  //     'Ivory Coast',
-  //     'Kenya',
-  //     'Lesotho',
-  //     'Liberia',
-  //     'Libya',
-  //     'Madagascar',
-  //     'Malawi',
-  //     'Mali',
-  //     'Mauritania',
-  //     'Mauritius',
-  //     'Morocco',
-  //     'Mozambique',
-  //     'Namibia',
-  //     'Niger',
-  //     'Nigeria',
-  //     'Rwanda',
-  //     'Sao Tome and Principe',
-  //     'Senegal',
-  //     'Seychelles',
-  //     'Sierra Leone',
-  //     'Somalia',
-  //     'South Africa',
-  //     'South Sudan',
-  //     'Sudan',
-  //     'Tanzania',
-  //     'Togo',
-  //     'Tunisia',
-  //     'Uganda',
-  //     'Zambia',
-  //     'Zimbabwe'
-  //   ]
-  // },
-
   {
     'name': 'South America',
     'imageUrl':
@@ -543,25 +507,4 @@ List<Map<String, dynamic>> regions = [
       'United States'
     ]
   },
-  // {
-  //   'name': 'Oceania',
-  //   'imageUrl':
-  //       'https://img.freepik.com/premium-vector/australia-oceania-map-monochrome-australia-icon-vector_189959-318.jpg',
-  //   'countries': [
-  //     'Australia',
-  //     'Fiji',
-  //     'Kiribati',
-  //     'Marshall Islands',
-  //     'Micronesia',
-  //     'Nauru',
-  //     'New Zealand',
-  //     'Palau',
-  //     'Papua New Guinea',
-  //     'Samoa',
-  //     'Solomon Islands',
-  //     'Tonga',
-  //     'Tuvalu',
-  //     'Vanuatu'
-  //   ]
-  // },
 ];
