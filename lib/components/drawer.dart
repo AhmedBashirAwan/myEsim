@@ -1,6 +1,5 @@
 import 'package:esim/globals.dart';
 import 'package:esim/src/auth/controller/authcontroller.dart';
-import 'package:esim/src/settings/views/account_details.dart';
 import 'package:esim/src/settings/views/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +23,7 @@ class _DrrawerState extends State<Drrawer> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AccountDetails()),
-                );
+                
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -96,10 +91,6 @@ class _DrrawerState extends State<Drrawer> {
               ],
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AccountDetails()),
-              );
             },
           ),
           ListTile(
