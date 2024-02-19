@@ -1,4 +1,0 @@
-#Mon Feb 19 14:49:15 PKT 2024
-base.0=C\:\\esim\\android\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

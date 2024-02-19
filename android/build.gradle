@@ -1,17 +1,12 @@
-buildscript {
-    ext.kotlin_version = '1.7.10' 
+allprojects {
+    ext.kotlin_version = '1.6.0'
     repositories {
-        google() // Add Google Maven repository if needed
-        mavenCentral() // Add Maven Central repository if needed
-        jcenter() // Add JCenter repository if needed
-        // Add JetBrains repository for Kotlin plugins
-        maven { url "https://kotlin.bintray.com/kotlinx" }
-    } 
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+        google()
+        mavenCentral()
     }
 }
 
+rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
