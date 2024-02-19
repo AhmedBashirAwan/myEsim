@@ -1,8 +1,8 @@
 import 'package:esim/globals.dart';
 import 'package:flutter/material.dart';
 
-class Edit_info extends StatelessWidget {
-  const Edit_info({super.key});
+class EditInfo extends StatelessWidget {
+  const EditInfo({super.key});
 
   @override
   Widget build(BuildContext context) {

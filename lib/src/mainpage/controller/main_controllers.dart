@@ -5,6 +5,7 @@ import 'package:esim/src/mainpage/models/countries_model.dart';
 import 'package:esim/src/mainpage/models/esim_model.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
 import 'package:esim/src/mainpage/models/pricingmodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../globals.dart';
@@ -116,12 +117,12 @@ class MainController {
   }
 
   Future<void> updatingPrice(
-      String data, String validation_days, String price) async {
+      String data, String validationDays, String price) async {
     try {
       QuerySnapshot<Map<String, dynamic>> doc = await FirebaseFirestore.instance
           .collection('offers_pricings')
           .where('data', isEqualTo: data)
-          .where('validation_dates', isEqualTo: validation_days)
+          .where('validation_dates', isEqualTo: validationDays)
           .get();
 
       if (doc.docs.isNotEmpty) {
@@ -130,7 +131,7 @@ class MainController {
       } else {
         await FirebaseFirestore.instance.collection('offers_pricings').add({
           'data': data,
-          'validation_dates': validation_days,
+          'validation_dates': validationDays,
           'price': price,
         });
       }
@@ -140,7 +141,6 @@ class MainController {
   }
 
   Future<EsimResponse> creatingEsim(String region) async {
- 
     String data =
         '{ "tag": "", "region": "$region" }'; // Convert data to string
 
@@ -163,6 +163,30 @@ class MainController {
       }
     } catch (error) {
       throw Exception('Error: $error');
+    }
+  }
+
+  Future<void> userEsim(
+      String iCCID, String activationCode, bool activationStatus) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('user_eSIMs')
+          .where('ICCID', isEqualTo: iCCID)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        return;
+      }
+
+      Map<String, dynamic> payload = {
+        'ICCID': iCCID,
+        'activation_Status': activationStatus,
+        'activation_code': activationCode,
+        'user_ID': FirebaseAuth.instance.currentUser!.uid
+      };
+      await FirebaseFirestore.instance.collection('user_eSIMs').add(payload);
+    } catch (e) {
+      print('Error adding document: $e');
     }
   }
 }

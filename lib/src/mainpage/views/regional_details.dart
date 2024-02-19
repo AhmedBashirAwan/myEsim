@@ -325,11 +325,15 @@ class _RegionalDetailsState extends State<RegionalDetails> {
                                                     MainController()
                                                         .creatingEsim(
                                                             widget.regionName);
+
+                                                plans;
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         QrScreen(
+                                                            price: price,
+                                                            plans: plans[index],
                                                             esim: esimResponse),
                                                   ),
                                                 );

@@ -5,8 +5,10 @@ import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:esim/src/mainpage/models/esim_model.dart'; // Import EsimResponse
 
 class QrScreen extends StatefulWidget {
-  final Future<EsimResponse>? esim; // Declare esim as a Future
-  const QrScreen({Key? key, this.esim}) : super(key: key);
+  var plans;
+  final String? price;
+  final Future<EsimResponse>? esim;
+  QrScreen({Key? key, this.esim, this.plans, this.price}) : super(key: key);
 
   @override
   State<QrScreen> createState() => _QrScreenState();
@@ -77,17 +79,17 @@ class _QrScreenState extends State<QrScreen>
                     controller: _tabController,
                     children: [
                       FutureBuilder<EsimResponse>(
-                        future:
-                            widget.esim, // Use widget.esim to access the future
+                        future: widget.esim,
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else if (snapshot.hasError) {
                             return Text('Error: ${snapshot.error}');
                           } else if (snapshot.hasData) {
-                            // Once the future completes, you can access the data
                             final esimResponse = snapshot.data!;
+
                             return Material(
                               elevation: 20,
                               borderRadius: BorderRadius.circular(12),
@@ -98,14 +100,15 @@ class _QrScreenState extends State<QrScreen>
                                     height: getHeight(context) * 0.3,
                                     child: PrettyQrView.data(
                                       data: esimResponse.esim
-                                          .activationCode, // Use activationCode here
+                                          .activationCode, 
                                     ),
                                   ),
                                 ),
                               ),
                             );
                           } else {
-                            return const Center(child: Text('No data available'));
+                            return const Center(
+                                child: Text('No data available'));
                           }
                         },
                       ),
@@ -115,12 +118,12 @@ class _QrScreenState extends State<QrScreen>
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else if (snapshot.hasError) {
                             return Text('Error: ${snapshot.error}');
                           } else if (snapshot.hasData) {
                             final esimResponse = snapshot.data!;
-                            print(esimResponse.esim.activationCode);
                             return Material(
                               elevation: 20,
                               borderRadius: BorderRadius.circular(12),
@@ -138,7 +141,8 @@ class _QrScreenState extends State<QrScreen>
                               ),
                             );
                           } else {
-                            return const Center(child: Text('No data available'));
+                            return const Center(
+                                child: Text('No data available'));
                           }
                         },
                       ),
@@ -147,7 +151,8 @@ class _QrScreenState extends State<QrScreen>
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    StripePaymentHandle().payment();
+                    // StripePaymentHandle()
+                    //     .payment('${widget.price.toString()}00');
                   },
                   child: const Text('Payment'),
                 )

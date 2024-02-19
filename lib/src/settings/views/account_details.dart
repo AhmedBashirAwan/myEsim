@@ -88,7 +88,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Edit_info(),
+                                      builder: (context) => const EditInfo(),
                                     ),
                                   );
                                 },
@@ -126,7 +126,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Memebership(),
+                                      builder: (context) => const Memebership(),
                                     ),
                                   );
                                 },
@@ -164,7 +164,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Savecards(),
+                                      builder: (context) => const Savecards(),
                                     ),
                                   );
                                 },
@@ -202,7 +202,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => ReferandEarn(),
+                                      builder: (context) => const ReferandEarn(),
                                     ),
                                   );
                                 },
@@ -240,7 +240,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Orders(),
+                                      builder: (context) => const Orders(),
                                     ),
                                   );
                                 },

@@ -14,13 +14,13 @@ class Moreinfo extends StatelessWidget {
             child: const Icon(Icons.arrow_back_ios_new)),
         title: const Text('More Info'),
       ),
-      body: SafeArea(
+      body: const SafeArea(
           child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
               child: Row(
                 children: [
                   Text(
@@ -37,7 +37,7 @@ class Moreinfo extends StatelessWidget {
             ),
             Divider(),
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
               child: Row(
                 children: [
                   Text(
@@ -54,7 +54,7 @@ class Moreinfo extends StatelessWidget {
             ),
             Divider(),
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
               child: Row(
                 children: [
                   Text(

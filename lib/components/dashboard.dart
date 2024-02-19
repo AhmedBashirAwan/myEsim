@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../src/mainpage/views/main_sccreen.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     _pages = [
       const MainScreen(),
-      const QrScreen(),
+       QrScreen(),
       // FirebaseAuth.instance.currentUs/urrentUser!.uid.isNotEmpty
       // ?
       const ProfileView()

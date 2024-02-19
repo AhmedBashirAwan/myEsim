@@ -3,7 +3,7 @@ import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:flutter/material.dart';
 
 class Ttitle extends StatefulWidget {
-  const Ttitle({Key? key}) : super(key: key);
+  const Ttitle({super.key});
 
   @override
   State<Ttitle> createState() => _TtitleState();

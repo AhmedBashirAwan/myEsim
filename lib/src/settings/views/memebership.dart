@@ -137,12 +137,12 @@ class Memebership extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: Colors.black54),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 12),
+                            EdgeInsets.only(left: 12, right: 12, top: 12),
                         child: Row(
                           children: [
                             Text(
@@ -163,7 +163,7 @@ class Memebership extends StatelessWidget {
                       ),
                       Divider(),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        padding: EdgeInsets.symmetric(horizontal: 14),
                         child: Row(
                           children: [
                             Text(
@@ -185,7 +185,7 @@ class Memebership extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        padding: EdgeInsets.symmetric(horizontal: 50),
                         child: Divider(
                           height: 20,
                           thickness: 10,

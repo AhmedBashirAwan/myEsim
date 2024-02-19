@@ -2,15 +2,14 @@ import 'package:esim/firebase_options.dart';
 import 'package:esim/src/auth/views/title.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Stripe.publishableKey =
-      'pk_test_51OiEIjKJXVCbENfEwdrmAmXC69UhgmZZEYkvzeavyz1hWkK1CPAcKQeab7q42KRmBD4Xn0s6qxCWhgyADWEWnTed00xJIMxUGr';
-  Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
+  // Stripe.publishableKey =
+  //     'pk_test_51OiEIjKJXVCbENfEwdrmAmXC69UhgmZZEYkvzeavyz1hWkK1CPAcKQeab7q42KRmBD4Xn0s6qxCWhgyADWEWnTed00xJIMxUGr';
+  // Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   // Stripe.urlScheme = 'flutterstripe';
-  await Stripe.instance.applySettings();
+  // await Stripe.instance.applySettings();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

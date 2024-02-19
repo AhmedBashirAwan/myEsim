@@ -8,7 +8,7 @@ import '../../../globals.dart';
 
 class LocalPanel extends StatefulWidget {
   final String searchQuery;
-  const LocalPanel({Key? key, required this.searchQuery}) : super(key: key);
+  const LocalPanel({super.key, required this.searchQuery});
 
   @override
   State<LocalPanel> createState() => _LocalPanelState();

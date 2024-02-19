@@ -174,7 +174,7 @@ class _RegisterationState extends State<Registeration>
                                   } catch (e) {
                                     // Show a Snackbar if login fails
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                         content: Text(
                                             'Login failed. Please check your credentials.'),
                                       ),

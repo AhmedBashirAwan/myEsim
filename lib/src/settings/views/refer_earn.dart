@@ -45,7 +45,7 @@ class ReferandEarn extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: getWidth(context) * 0.8,
-                        child: Text(
+                        child: const Text(
                           textAlign: TextAlign.center,
                           "Share Amazing eSIM Techonology with Friends",
                           style: TextStyle(
@@ -54,7 +54,7 @@ class ReferandEarn extends StatelessWidget {
                               fontSize: 20),
                         ),
                       ),
-                      Text(
+                      const Text(
                         "Give US\$3, Get US\$3",
                         style: TextStyle(
                             color: Colors.white,

@@ -79,7 +79,7 @@ class MainScreenState extends State<MainScreen>
                             builder: (context, snapshot) {
                               final userName = snapshot.data?['name'] ?? "User";
                               return Text(
-                                'Hello, ${userName}',
+                                'Hello, $userName',
                                 style: const TextStyle(
                                     fontSize: 20, color: Colors.white),
                               );

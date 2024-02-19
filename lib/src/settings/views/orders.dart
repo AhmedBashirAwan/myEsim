@@ -19,7 +19,7 @@ class Orders extends StatelessWidget {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(),
+          const Row(),
           SizedBox(
             height: getHeight(context) * 0.4,
           ),

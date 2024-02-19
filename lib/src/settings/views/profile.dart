@@ -364,7 +364,7 @@ class _ProfileViewState extends State<ProfileView> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const Edit_info(),
+                                                    const EditInfo(),
                                               ),
                                             );
                                           },
@@ -527,7 +527,8 @@ class _ProfileViewState extends State<ProfileView> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => const Orders(),
+                                                builder: (context) =>
+                                                    const Orders(),
                                               ),
                                             );
                                           },

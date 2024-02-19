@@ -11,11 +11,11 @@ class LocalDetails extends StatefulWidget {
   final String countryName;
   final String iso2;
   const LocalDetails({
-    Key? key,
+    super.key,
     required this.countryCode,
     required this.countryName,
     required this.iso2,
-  }) : super(key: key);
+  });
 
   @override
   State<LocalDetails> createState() => _LocalDetailsState();
