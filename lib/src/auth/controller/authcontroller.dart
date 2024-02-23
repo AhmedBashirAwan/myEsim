@@ -1,7 +1,8 @@
-
+// ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class AuthController {
   Future<UserCredential> loginInTheFirebase(
@@ -59,8 +60,24 @@ class AuthController {
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
+      
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> forgetPass(BuildContext context, String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+       const snackBar = SnackBar(
+        content: Text('we have Send you an Email at your email'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (e) {
+      const snackBar = SnackBar(
+        content: Text('NO email found'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 }

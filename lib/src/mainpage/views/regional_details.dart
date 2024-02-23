@@ -1,5 +1,6 @@
 import 'package:esim/globals.dart';
 import 'package:esim/src/auth/views/registeration.dart';
+import 'package:esim/src/mainpage/controller/lists_controller.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/models/esim_model.dart';
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 class RegionalDetails extends StatefulWidget {
   final String regionName;
 
-  const RegionalDetails({Key? key, required this.regionName}) : super(key: key);
+  const RegionalDetails({super.key, required this.regionName});
 
   @override
   State<RegionalDetails> createState() => _RegionalDetailsState();
@@ -22,7 +23,8 @@ class _RegionalDetailsState extends State<RegionalDetails> {
   Future<void> checkingForAdmin() async {
     if (FirebaseAuth.instance.currentUser != null &&
         FirebaseAuth.instance.currentUser!.email ==
-            'artan.blakqori@gmail.com') {
+            // 'artan.blakqori@gmail.com'
+            'ahmedbashirawan@gmail.com') {
       setState(() {
         adminUser = true;
       });
@@ -265,14 +267,15 @@ class _RegionalDetailsState extends State<RegionalDetails> {
                                                           TextButton(
                                                             onPressed: () {
                                                               MainController().updatingPrice(
-                                                                  plans
-                                                                      .dataQuotaMb
+                                                                  plans[index][
+                                                                          'data_quota_mb']
                                                                       .toString(),
-                                                                  plans
-                                                                      .validityDays
+                                                                  plans[index][
+                                                                          'validity_days']
                                                                       .toString(),
                                                                   rate.text
                                                                       .trim());
+
                                                               setState(() {});
                                                               Navigator.of(
                                                                       context)
@@ -324,9 +327,10 @@ class _RegionalDetailsState extends State<RegionalDetails> {
                                                     esimResponse =
                                                     MainController()
                                                         .creatingEsim(
-                                                            widget.regionName);
-
-                                                plans;
+                                                            widget.regionName,
+                                                            plans[index]
+                                                                ['uid']);
+                                                print(plans[index]['uid']);
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(

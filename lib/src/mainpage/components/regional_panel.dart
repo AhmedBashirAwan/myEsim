@@ -1,4 +1,4 @@
-import 'package:esim/src/mainpage/controller/main_controllers.dart';
+import 'package:esim/src/mainpage/controller/lists_controller.dart';
 import 'package:esim/src/mainpage/views/regional_details.dart';
 import 'package:flutter/material.dart';
 

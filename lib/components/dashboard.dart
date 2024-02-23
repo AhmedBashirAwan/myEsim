@@ -1,5 +1,5 @@
-import 'package:esim/src/qrscreens/views/qr_screen.dart';
-import 'package:esim/src/settings/views/profile.dart';
+import 'package:esim/src/plans/views/plans.dart';
+import 'package:esim/src/profiles/views/profile.dart';
 import 'package:flutter/material.dart';
 import '../src/mainpage/views/main_sccreen.dart';
 
@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     _pages = [
       const MainScreen(),
-       QrScreen(),
+      const Plans(),
       // FirebaseAuth.instance.currentUs/urrentUser!.uid.isNotEmpty
       // ?
       const ProfileView()

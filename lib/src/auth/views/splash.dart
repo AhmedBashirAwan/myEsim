@@ -18,13 +18,12 @@ class _TtitleState extends State<Ttitle> {
 
   void _populateCountriesAndNavigate() async {
     try {
-      await MainController().fetchingAllFlags();
+      await MainController().fetchEachFlag();
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Dashboard()),
       );
     } catch (error) {
-      // You might want to display an error message or retry logic here
     }
   }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, sort_child_properties_last
+
 import 'package:flutter/material.dart';
 
 class TextMarqueeWidget extends StatefulWidget {
@@ -6,13 +8,13 @@ class TextMarqueeWidget extends StatefulWidget {
   final Duration animationDuration, backDuration, pauseDuration;
 
   const TextMarqueeWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.direction = Axis.horizontal,
     this.animationDuration = const Duration(milliseconds: 6000),
     this.backDuration = const Duration(milliseconds: 800),
     this.pauseDuration = const Duration(milliseconds: 800),
-  }) : super(key: key);
+  });
 
   @override
   _MarqueeWidgetState createState() => _MarqueeWidgetState();

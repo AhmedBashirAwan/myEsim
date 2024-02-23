@@ -1,4 +1,5 @@
 import 'package:esim/globals.dart';
+import 'package:esim/src/qrscreens/controllers/activation_controller.dart';
 import 'package:esim/src/qrscreens/controllers/stripe_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
@@ -14,145 +15,80 @@ class QrScreen extends StatefulWidget {
   State<QrScreen> createState() => _QrScreenState();
 }
 
-class _QrScreenState extends State<QrScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
+class _QrScreenState extends State<QrScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(Icons.arrow_back_ios_new)),
+        title: const Text(
+          'My eSIMs',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'My eSIMs',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ],
+                SizedBox(
+                  width: getWidth(context) * 0.9,
+                  child: const Text(
+                    textAlign: TextAlign.center,
+                    'Scan the given QR for activating the eSIM',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                   ),
                 ),
-                TabBar(
-                  indicator: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                  ),
-                  controller: _tabController,
-                  tabs: [
-                    Tab(
-                      child: SizedBox(
-                        width: getWidth(context) * 0.23,
-                        child: const Text(
-                          'Current ESIMs',
-                        ),
-                      ),
-                    ),
-                    Tab(
-                      child: SizedBox(
-                        width: getWidth(context) * 0.23,
-                        child: const Text(
-                          'Archived ESIMs',
-                        ),
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: getHeight(context) * 0.1,
                 ),
-                Expanded(
-                  child: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      FutureBuilder<EsimResponse>(
-                        future: widget.esim,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else if (snapshot.hasData) {
-                            final esimResponse = snapshot.data!;
+                FutureBuilder<EsimResponse>(
+                  future: widget.esim,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      final esimResponse = snapshot.data!;
 
-                            return Material(
-                              elevation: 20,
-                              borderRadius: BorderRadius.circular(12),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: SizedBox(
-                                    height: getHeight(context) * 0.3,
-                                    child: PrettyQrView.data(
-                                      data: esimResponse.esim
-                                          .activationCode, 
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          } else {
-                            return const Center(
-                                child: Text('No data available'));
-                          }
-                        },
-                      ),
-                      FutureBuilder<EsimResponse>(
-                        future:
-                            widget.esim, // Use widget.esim to access the future
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else if (snapshot.hasData) {
-                            final esimResponse = snapshot.data!;
-                            return Material(
-                              elevation: 20,
-                              borderRadius: BorderRadius.circular(12),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: SizedBox(
-                                    height: getHeight(context) * 0.3,
-                                    child: PrettyQrView.data(
-                                      data: esimResponse.esim
-                                          .activationCode, // Use activationCode here
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          } else {
-                            return const Center(
-                                child: Text('No data available'));
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+                      return Material(
+                        elevation: 20,
+                        borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: SizedBox(
+                            width: getWidth(context) * 0.52,
+                            child: PrettyQrView.data(
+                              data: esimResponse.esim.activationCode,
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return const Center(child: Text('No data available'));
+                    }
+                  },
                 ),
+                const Spacer(),
                 ElevatedButton(
                   onPressed: () async {
-                    // StripePaymentHandle()
-                    //     .payment('${widget.price.toString()}00');
+                    StripePaymentHandle().payment('${widget.price}00');
+                    EsimResponse? esimResponse = await widget.esim;
+                    if (esimResponse != null) {
+                      ActivationController().userEsim(
+                        plan_ID: widget.plans['uid'],
+                        iCCID: esimResponse.esim.iccid.toString(),
+                      );
+                    } else {}
                   },
                   child: const Text('Payment'),
                 )

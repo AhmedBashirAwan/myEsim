@@ -1,10 +1,9 @@
-import 'package:esim/src/mainpage/models/countries_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:esim/components/MarqueeWidget.dart';
 import 'package:esim/src/mainpage/views/local_details.dart';
 
-import '../../../globals.dart';
+import '../controller/lists_controller.dart';
 
 class LocalPanel extends StatefulWidget {
   final String searchQuery;
@@ -17,33 +16,23 @@ class LocalPanel extends StatefulWidget {
 class _LocalPanelState extends State<LocalPanel> {
   @override
   void initState() {
-    // MainController().fetchingAllFlags();
+    eachCountries;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Country?> searchedCountries = [];
+    List<Map<String, dynamic>> searchedCountries = [];
     if (widget.searchQuery.isNotEmpty) {
-      for (var element in allCountries) {
-        if (element.name
+      for (var element in eachCountries) {
+        if (element['region_name']
             .toLowerCase()
-            .contains(widget.searchQuery.toLowerCase().toString())) {
+            .contains(widget.searchQuery.toLowerCase())) {
           searchedCountries.add(element);
         }
       }
-      Map<String, dynamic> clientCountry = {
-        'name': 'Kosovo',
-        'flag': 'https://www.svgrepo.com/show/405524/flag-for-flag-kosovo.svg',
-        'iso2': 'XK',
-        'iso3': 'KSV',
-      };
-      Country country = Country.fromJson(clientCountry);
-      searchedCountries.add(country);
     } else {
-      for (var element in allCountries) {
-        searchedCountries.add(element);
-      }
+      searchedCountries.addAll(eachCountries);
     }
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -67,7 +56,7 @@ class _LocalPanelState extends State<LocalPanel> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: SvgPicture.network(
-                  searchedCountries[index]!.flag,
+                  'https://flagcdn.com/${searchedCountries[index]['region_iso2']}.svg',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -80,10 +69,11 @@ class _LocalPanelState extends State<LocalPanel> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextMarqueeWidget(
-                        child: Text(searchedCountries[index]!.name.toString()),
+                        child: Text(
+                            searchedCountries[index]['region_name'].toString()),
                       ),
                       Text(
-                        allCountries[index].iso3.toString(),
+                        searchedCountries[index]['region_iso3'].toString(),
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 10,
@@ -105,9 +95,12 @@ class _LocalPanelState extends State<LocalPanel> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => LocalDetails(
-                        iso2: searchedCountries[index]!.iso2.toString(),
-                        countryName: searchedCountries[index]!.name.toString(),
-                        countryCode: searchedCountries[index]!.iso3.toString(),
+                        iso2:
+                            searchedCountries[index]['region_iso2'].toString(),
+                        countryName:
+                            searchedCountries[index]['region_name'].toString(),
+                        countryCode:
+                            searchedCountries[index]['region_iso3'].toString(),
                       ),
                     ),
                   );

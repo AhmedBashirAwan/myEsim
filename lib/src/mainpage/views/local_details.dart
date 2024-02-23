@@ -1,6 +1,7 @@
 import 'package:esim/src/auth/views/registeration.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/models/esim_model.dart';
+import 'package:esim/src/mainpage/models/plansType_model.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,7 +24,7 @@ class LocalDetails extends StatefulWidget {
 
 class _LocalDetailsState extends State<LocalDetails> {
   bool adminUser = false;
-
+  var pickPrice;
   TextEditingController rate = TextEditingController();
 
   Future<void> checkingForAdmin() async {
@@ -32,7 +33,6 @@ class _LocalDetailsState extends State<LocalDetails> {
             'artan.blakqori@gmail.com') {
       setState(() {
         adminUser = true;
-        print('Admin access given');
       });
     } else {
       setState(() {
@@ -67,19 +67,33 @@ class _LocalDetailsState extends State<LocalDetails> {
             return const Center(child: Text('No data available'));
           }
           List<PlanType> allPlans = (snapshot.data as dynamic).planTypes;
-          allPlans;
           List<PlanType> countryPlan = [];
-          for (var element in allPlans) {
-            if (element.countriesEnabled.contains(widget.countryCode)) {
-              if (!countryPlan.contains(element)) {
-                if (element.name
-                    .toLowerCase()
-                    .contains(widget.countryName.toLowerCase())) {
-                  countryPlan.add(element);
-                }
-              }
+
+          List<PlanType> eachPlan = allPlans
+              .where((element) =>
+                  element.countriesEnabled.contains(widget.countryCode))
+              .toList();
+          for (var element in eachPlan) {
+            if (countryPlan.contains(element) == false) {
+              // if (element.name
+              //     .toLowerCase()
+              //     .contains(widget.countryName.toLowerCase())) {
+              countryPlan.add(element);
+              // }
             }
           }
+
+          // for (var element in allPlans) {
+          //   if (element.countriesEnabled.contains(widget.countryCode)) {
+          //     if (!countryPlan.contains(element)) {
+          //       if (element.name
+          //           .toLowerCase()
+          //           .contains(widget.countryName.toLowerCase())) {
+          //         countryPlan.add(element);
+          //       }
+          //     }
+          //   }
+          // }
           return ListView.builder(
             itemCount: countryPlan.length,
             itemBuilder: (context, index) {
@@ -336,6 +350,7 @@ class _LocalDetailsState extends State<LocalDetails> {
                                               ? {'price': '5'}
                                               : {'price': 'N/A'},
                                         )['price'];
+                                        pickPrice = price;
                                         return Text(
                                           '\$${price.toString()}',
                                           style: const TextStyle(
@@ -358,13 +373,16 @@ class _LocalDetailsState extends State<LocalDetails> {
                                       FirebaseAuth.instance.currentUser!.uid
                                           .isNotEmpty) {
                                     Future<EsimResponse> esimResponse =
-                                        MainController()
-                                            .creatingEsim(widget.iso2);
+                                        MainController().creatingEsim(
+                                            widget.iso2, plan.uid);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            QrScreen(esim: esimResponse),
+                                        builder: (context) => QrScreen(
+                                          esim: esimResponse,
+                                          plans: {'uid': plan.uid},
+                                          price: pickPrice,
+                                        ),
                                       ),
                                     );
                                   } else {

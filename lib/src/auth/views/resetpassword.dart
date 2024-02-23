@@ -1,98 +1,75 @@
 import 'package:esim/globals.dart';
-import 'package:esim/src/auth/views/sign_in.dart';
+import 'package:esim/src/auth/controller/authcontroller.dart';
+import 'package:esim/src/auth/views/registeration.dart';
 import 'package:flutter/material.dart';
 
-class ResetPass extends StatelessWidget {
+class ResetPass extends StatefulWidget {
   const ResetPass({super.key});
+
+  @override
+  State<ResetPass> createState() => _ResetPassState();
+}
+
+class _ResetPassState extends State<ResetPass> {
+  TextEditingController email = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(Icons.arrow_back_ios_new)),
+        title: const Text('Reset Password'),
+      ),
       body: SafeArea(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Spacer(),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                alignment: Alignment.center,
-                width: 200,
-                child: const Text(
-                  'Reset Password',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-              SizedBox(height: getHeight(context) * 0.051),
-              SizedBox(
-                width: 280,
-                height: 65,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.black26),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: getWidth(context),
+                  height: 65,
+                  child: TextFormField(
+                    controller: email,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Colors.black26),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 15),
+                      labelText: 'Email Address',
                     ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 15),
-                    labelText: 'Phone Number',
                   ),
-                  // validator: (value) {},
                 ),
-              ),
-              Container(
-                width: 280,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(24, 91, 255, 1),
-                  borderRadius: BorderRadius.circular(10),
+                const SizedBox(
+                  height: 50,
                 ),
-                child: TextButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => LocalSims()),
-                      // );
-                    },
-                    style: const ButtonStyle(),
-                    child: const Text('Send Reset Link',
-                        style: TextStyle(color: Colors.white))),
-              ),
-              SizedBox(height: getHeight(context) * 0.3),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                width: 280,
-                height: 20,
-                child: Row(
-                  children: [
-                    const Text("Already Have An Account ?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                        )),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      onTap: () {
+                Container(
+                  width: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.black87,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextButton(
+                      onPressed: () {
+                        AuthController().forgetPass(context, email.text.trim());
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const SignIn()),
+                          MaterialPageRoute(
+                              builder: (context) => const Registeration()),
                         );
                       },
-                      child: const Text('Sign In',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(24, 91, 255, 1),
-                          )),
-                    )
-                  ],
+                      style: const ButtonStyle(),
+                      child: const Text('Send Reset Link',
+                          style: TextStyle(color: Colors.white))),
                 ),
-              ),
-              SizedBox(height: getHeight(context) * 0.04),
-            ],
+                const Spacer(),
+              ],
+            ),
           ),
         ),
       ),

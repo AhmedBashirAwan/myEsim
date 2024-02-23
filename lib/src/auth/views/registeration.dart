@@ -1,6 +1,7 @@
 import 'package:esim/components/dashboard.dart';
 import 'package:esim/globals.dart';
 import 'package:esim/src/auth/controller/authcontroller.dart';
+import 'package:esim/src/auth/views/resetpassword.dart';
 import 'package:flutter/material.dart';
 
 class Registeration extends StatefulWidget {
@@ -140,7 +141,14 @@ class _RegisterationState extends State<Registeration>
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ResetPass(),
+                                ),
+                              );
+                            },
                             child: const Text(
                               'Forget Password?',
                               style: TextStyle(
@@ -365,7 +373,7 @@ class _RegisterationState extends State<Registeration>
                                   AuthController().creatingUser(
                                       email: _signEmail.text.trim(),
                                       pass: _signPass.text.trim(),
-                                      name: _firstName.text + _lastName.text);
+                                      name: '${_firstName.text.trim()} ${_lastName.text.trim()}');
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

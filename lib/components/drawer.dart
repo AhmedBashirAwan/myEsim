@@ -1,6 +1,6 @@
 import 'package:esim/globals.dart';
 import 'package:esim/src/auth/controller/authcontroller.dart';
-import 'package:esim/src/settings/views/settings.dart';
+import 'package:esim/src/profiles/views/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
