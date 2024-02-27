@@ -3,6 +3,7 @@ import 'package:esim/src/auth/views/registeration.dart';
 import 'package:esim/src/mainpage/controller/lists_controller.dart';
 import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/models/esim_model.dart';
+import 'package:esim/src/qrscreens/controllers/stripe_controllers.dart';
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,10 @@ class _RegionalDetailsState extends State<RegionalDetails> {
 
   Future<void> checkingForAdmin() async {
     if (FirebaseAuth.instance.currentUser != null &&
-        FirebaseAuth.instance.currentUser!.email ==
-            // 'artan.blakqori@gmail.com'
-            'ahmedbashirawan@gmail.com') {
+            FirebaseAuth.instance.currentUser!.email ==
+                'artan.blakqori@gmail.com'
+        // 'ahmedbashirawan@gmail.com'
+        ) {
       setState(() {
         adminUser = true;
       });
@@ -314,7 +316,7 @@ class _RegionalDetailsState extends State<RegionalDetails> {
                                       children: [
                                         Expanded(
                                           child: InkWell(
-                                            onTap: () {
+                                            onTap: () async {
                                               if (FirebaseAuth.instance
                                                           .currentUser !=
                                                       null &&
@@ -323,24 +325,15 @@ class _RegionalDetailsState extends State<RegionalDetails> {
                                                       .currentUser!
                                                       .uid
                                                       .isNotEmpty) {
-                                                Future<EsimResponse>
-                                                    esimResponse =
-                                                    MainController()
-                                                        .creatingEsim(
-                                                            widget.regionName,
-                                                            plans[index]
-                                                                ['uid']);
-                                                print(plans[index]['uid']);
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        QrScreen(
-                                                            price: price,
-                                                            plans: plans[index],
-                                                            esim: esimResponse),
-                                                  ),
+                                                await StripePaymentHandle()
+                                                    .payment(
+                                                  context: context,
+                                                  amount: '${price}00',
+                                                  planUid: plans[index]['uid'],
+                                                  regionName: widget.regionName,
                                                 );
+
+                                                
                                               } else {
                                                 Navigator.push(
                                                   context,

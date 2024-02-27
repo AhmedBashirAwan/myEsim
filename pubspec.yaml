@@ -38,12 +38,10 @@ dependencies:
   flutter_svg: ^2.0.9
   http: ^1.2.0
   firebase_core: ^2.25.4
-  google_sign_in: ^6.2.1
   firebase_auth: ^4.17.4
   cloud_firestore: ^4.15.4
   pretty_qr_code: ^3.2.1
   flutter_stripe: 8.0.0
-  flutter_barcode_scanner: ^2.0.0
 #  flutter_stripe:
 #    git:
 #      url: https://github.com/AhmedBashirAwan/flutter_stripe.git

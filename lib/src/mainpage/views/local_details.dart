@@ -3,6 +3,7 @@ import 'package:esim/src/mainpage/controller/main_controllers.dart';
 import 'package:esim/src/mainpage/models/esim_model.dart';
 import 'package:esim/src/mainpage/models/plansType_model.dart';
 import 'package:esim/src/mainpage/models/plans_model.dart';
+import 'package:esim/src/qrscreens/controllers/stripe_controllers.dart';
 import 'package:esim/src/qrscreens/views/qr_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -75,10 +76,20 @@ class _LocalDetailsState extends State<LocalDetails> {
               .toList();
           for (var element in eachPlan) {
             if (countryPlan.contains(element) == false) {
-              // if (element.name
-              //     .toLowerCase()
-              //     .contains(widget.countryName.toLowerCase())) {
-              countryPlan.add(element);
+              if (element.name
+                      .toLowerCase()
+                      .startsWith(widget.iso2.toLowerCase())
+                  // .contains(widget.iso2.toLowerCase())
+                  ) {
+                countryPlan.add(element);
+              } else if (element.name
+                  .toLowerCase()
+                  .contains(widget.countryName.toLowerCase())) {
+                countryPlan.add(element);
+              }
+              // else if (element.countriesEnabled
+              // .contains(widget.countryCode)) {
+              // countryPlan.add(element);
               // }
             }
           }
@@ -367,23 +378,16 @@ class _LocalDetailsState extends State<LocalDetails> {
                             Padding(
                               padding: const EdgeInsets.all(8),
                               child: InkWell(
-                                onTap: () {
+                                onTap: () async {
                                   if (FirebaseAuth.instance.currentUser !=
                                           null &&
                                       FirebaseAuth.instance.currentUser!.uid
                                           .isNotEmpty) {
-                                    Future<EsimResponse> esimResponse =
-                                        MainController().creatingEsim(
-                                            widget.iso2, plan.uid);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => QrScreen(
-                                          esim: esimResponse,
-                                          plans: {'uid': plan.uid},
-                                          price: pickPrice,
-                                        ),
-                                      ),
+                                    await StripePaymentHandle().payment(
+                                      context: context,
+                                      amount: '${pickPrice}00',
+                                      planUid: plan.uid,
+                                      regionName: widget.iso2,
                                     );
                                   } else {
                                     Navigator.push(

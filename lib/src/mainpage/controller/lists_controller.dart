@@ -1325,6 +1325,106 @@ List<Map<String, dynamic>> regions = [
     ]
   },
   {
+    'name': 'BALKANS',
+    'imageUrl':
+        'https://static.vecteezy.com/system/resources/thumbnails/011/853/043/small/basque-map-spain-region-illustration-vector.jpg',
+    'plans': [
+      {
+        "uid": "7gNe8gdehDa1",
+        "name": "USA 1GB - 5 Days",
+        "policy_name": "Maximum Data 1GB",
+        "data_quota_mb": 1000,
+        "validity_days": 5,
+      },
+      {
+        "uid": "J97UOgRnYC0R",
+        "name": "USA 3GB - 7 Days",
+        "policy_name": "Maximum Data 3GB",
+        "data_quota_mb": 3000,
+        "validity_days": 7,
+      },
+      {
+        "uid": "h3igOiLRqwt0",
+        "name": "USA 5GB - 15 Days",
+        "policy_name": "Maximum Data 5GB",
+        "data_quota_mb": 5000,
+        "validity_days": 15,
+      },
+      {
+        "uid": "WYKvjHciAucg",
+        "name": "USA 10GB - 30 Days",
+        "policy_name": "Maximum Data 10GB",
+        "data_quota_mb": 10000,
+        "validity_days": 30,
+      },
+      {
+        "uid": "t3iUJKxuwRlU",
+        "name": "USA 20GB - 30 Days",
+        "policy_name": "Maximum Data 20GB",
+        "data_quota_mb": 20000,
+        "validity_days": 30,
+      },
+      {
+        "uid": "TctuDvZ4cOpq",
+        "name": "USA 30GB - 90 Days",
+        "policy_name": "Maximum Data 30GB",
+        "data_quota_mb": 30000,
+        "validity_days": 90,
+      },
+    ],
+    'countries': []
+  },
+  {
+    'name': 'EU&BALKAN',
+    'imageUrl':
+        'https://thumbs.dreamstime.com/z/map-western-balkans-black-vector-illustration-111804858.jpg',
+    'plans': [
+      {
+        "uid": "CNRG85HMeFxr",
+        "name": "USA 1GB - 5 Days",
+        "policy_name": "Maximum Data 1GB",
+        "data_quota_mb": 1000,
+        "validity_days": 5,
+      },
+      {
+        "uid": "txPFXPeWveuc",
+        "name": "USA 3GB - 7 Days",
+        "policy_name": "Maximum Data 3GB",
+        "data_quota_mb": 3000,
+        "validity_days": 7,
+      },
+      {
+        "uid": "N0Co5oQuWDOw",
+        "name": "USA 5GB - 15 Days",
+        "policy_name": "Maximum Data 5GB",
+        "data_quota_mb": 5000,
+        "validity_days": 15,
+      },
+      {
+        "uid": "VZmvvnzazPlb",
+        "name": "USA 10GB - 30 Days",
+        "policy_name": "Maximum Data 10GB",
+        "data_quota_mb": 10000,
+        "validity_days": 30,
+      },
+      {
+        "uid": "MbgtNwgRurOX",
+        "name": "USA 20GB - 30 Days",
+        "policy_name": "Maximum Data 20GB",
+        "data_quota_mb": 20000,
+        "validity_days": 30,
+      },
+      {
+        "uid": "9PUTX7NQzBeA",
+        "name": "USA 30GB - 90 Days",
+        "policy_name": "Maximum Data 30GB",
+        "data_quota_mb": 30000,
+        "validity_days": 90,
+      },
+    ],
+    'countries': []
+  },
+  {
     'name': 'Asia',
     'imageUrl':
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1LQPmhjirqant2jtNclW0l33_7-rdbUI05g&usqp=CAU',

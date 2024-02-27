@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ActivationController {
-  Future<void> userEsim({String? iCCID, String? plan_ID}) async {
+  Future<void> userEsim(
+      {required String iCCID, required String plan_ID}) async {
+    print(iCCID);
     try {
       final querySnapshot = await FirebaseFirestore.instance
           .collection('user_eSIMs')

@@ -371,48 +371,6 @@ class _ProfileViewState extends State<ProfileView> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const Memebership(),
-                                                ),
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  const Text(
-                                                    'Airmoney & membership',
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  const Spacer(),
-                                                  Container(
-                                                    height: 30,
-                                                    width: 30,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.black12,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20)),
-                                                    child: const Center(
-                                                        child: Icon(
-                                                      Icons.arrow_forward_ios,
-                                                      size: 20,
-                                                    )),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          const Divider(),
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
                                                       const Savecards(),
                                                 ),
                                               );
@@ -424,48 +382,6 @@ class _ProfileViewState extends State<ProfileView> {
                                                 children: [
                                                   const Text(
                                                     'Saved Cards',
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  const Spacer(),
-                                                  Container(
-                                                    height: 30,
-                                                    width: 30,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.black12,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20)),
-                                                    child: const Center(
-                                                        child: Icon(
-                                                      Icons.arrow_forward_ios,
-                                                      size: 20,
-                                                    )),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          const Divider(),
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const ReferandEarn(),
-                                                ),
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  const Text(
-                                                    'Refer & Earn',
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:

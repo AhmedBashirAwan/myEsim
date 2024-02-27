@@ -92,8 +92,42 @@ class _PlansState extends State<Plans> with SingleTickerProviderStateMixin {
                                     } else if (snapshot.hasError) {
                                       return Text('Error: ${snapshot.error}');
                                     } else if (snapshot.hasData) {
-                                      return Text(
-                                          snapshot.data!.iccid.toString());
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 10, right: 5, left: 5),
+                                        child: Material(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          elevation: 8,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(20),
+                                            child: Container(
+                                              height: getHeight(context) * 0.25,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      "Activation Code = ${snapshot.data!.activationCode.toString()}"),
+                                                  Text(
+                                                      "Date Assigned = ${snapshot.data!.dateAssigned.toString()}"),
+                                                  Text(
+                                                      "ICCID = ${snapshot.data!.iccid.toString()}"),
+                                                  Text(
+                                                      "Current Status = ${snapshot.data!.serviceStatus.toString()}"),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
                                     } else {
                                       return const Text('No data available');
                                     }

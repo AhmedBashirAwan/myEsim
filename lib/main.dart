@@ -7,9 +7,8 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey =
-      'pk_test_51OiEIjKJXVCbENfEwdrmAmXC69UhgmZZEYkvzeavyz1hWkK1CPAcKQeab7q42KRmBD4Xn0s6qxCWhgyADWEWnTed00xJIMxUGr';
+      'pk_test_51OI9BxLyPH6stzr3ZHuFbgJgJKo5KYTvycqNYs5XlvJw2aJuZGFR3j4aBDfaX8tKGmR7XXAp460plfVJ5bpnaz3B00hMNb15bX';
   // Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
-  // Stripe.urlScheme = 'flutterstripe';
   // await Stripe.instance.applySettings();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
