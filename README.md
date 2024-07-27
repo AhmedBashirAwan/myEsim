@@ -1,6 +1,6 @@
 # myEsim
 
-- At myEsim, we're redefining the way you stay connected while traveling abroad. Say goodbye to the inconvenience of traditional SIM cards.
+- At myEsim, we're redefining the way you stay connected while traveling abroad. Say goodbye to the inconvenience of traditional SIM cards.[Live Demo](https://apps.apple.com/pk/app/myesim/id6480527568)
 ---
 
 ### Table of Contents
@@ -50,19 +50,19 @@
 
 myEsim/
 ├── lib/
-│   ├── main.dart                     # Entry point of the application
-│   ├── globals.dart                  # Global variables and constants
-│   ├── firebase_options.dart         # Firebase configuration
-│   ├── components/                   # Reusable UI components
-│   │   ├── dashboard.dart            # Dashboard UI
-│   │   ├── drawer.dart               # Navigation drawer UI
-│   │   ├── marquee_widget.dart       # Marquee text widget
-│   │   ├── payment_method.dart       # Payment method UI
-│   ├── src/                          # Core application logic
-│   │   ├── auth/                     # Authentication-related code
-│   │   ├── mainpage/                 # Main application page
-│   │   ├── plans/                    # Plans management
-│   │   ├── profiles/                 # User profiles
-│   │   ├── qrscreens/                # QR code scanning and generation
-│   │   ├── vouchers/                 # Vouchers management
+│   ├── main.dart                     # Entry point of the application  
+│   ├── globals.dart                  # Global variables and constants  
+│   ├── firebase_options.dart         # Firebase configuration  
+│   ├── components/                   # Reusable UI components  
+│   │   ├── dashboard.dart            # Dashboard UI  
+│   │   ├── drawer.dart               # Navigation drawer UI  
+│   │   ├── marquee_widget.dart       # Marquee text widget  
+│   │   ├── payment_method.dart       # Payment method UI  
+│   ├── src/                          # Core application logic  
+│   │   ├── auth/                     # Authentication-related code  
+│   │   ├── mainpage/                 # Main application page  
+│   │   ├── plans/                    # Plans management  
+│   │   ├── profiles/                 # User profiles  
+│   │   ├── qrscreens/                # QR code scanning and generation  
+│   │   ├── vouchers/                 # Vouchers management  
 
