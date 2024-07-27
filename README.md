@@ -48,8 +48,8 @@
 
 ### Project Structure
 
-myEsim/
-├── lib/
+myEsim/  
+├── lib/  
 │   ├── main.dart                     # Entry point of the application  
 │   ├── globals.dart                  # Global variables and constants  
 │   ├── firebase_options.dart         # Firebase configuration  
